@@ -10,7 +10,7 @@ Lịch sử các lần compile sẽ được lưu lại tại file temp bằng p
 ## Xây dựng hàng đợi 
 Xây dựng hàng đợi để xác định thứ tự các lần compile tránh trường hợp nhiều người cùng compile cùng lúc.<br>
 Xây dựng hàng đợi bằng thư viện Node Bull dựa trên nền tảng Redis<br>
-[Bull](https://optimalbits.github.io/bull/)
-Tạo 1 hàng đợi mới
+[Bull](https://optimalbits.github.io/bull/)<br>
+-Tạo 1 hàng đợi mới<br>
 `const myFirstQueue = new Bull('my-first-queue');`
 
