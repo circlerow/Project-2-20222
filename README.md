@@ -79,6 +79,22 @@ myFirstQueue.on('completed', (job, result) => {
 <br>
 
 ![Hình ảnh minh họa](./job-lifecycle.jpeg)<br>
+### Events<br>
+Sự kiện hoàn thành cục bộ<br>
+```
+queue.on('completed', job => {
+  console.log(`Job with id ${job.id} has been completed`);
+})
+```
+Sự kiện hoàn thành toàn cục<br>
+```
+queue.on('global:completed', jobId => {
+  console.log(`Job with id ${jobId} has been completed`);
+})
+```
+Các sự kiện khác:<br>
+[Tài liệu tham khảo](https://github.com/OptimalBits/bull/blob/master/REFERENCE.md#eventsk)
+
 
 
 
