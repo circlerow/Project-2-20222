@@ -12,12 +12,13 @@ Xây dựng hàng đợi để xác định thứ tự các lần compile tránh
 Xây dựng hàng đợi bằng thư viện Node Bull dựa trên nền tảng Redis<br>
 [Thư viện Bull](https://optimalbits.github.io/bull/)<br>
 -Tạo 1 hàng đợi mới<br>
-`const myFirstQueue = new Bull('my-first-queue');`
+`const myFirstQueue = new Bull('my-first-queue');`<br>
 Một hàng đợi thường có 3 vai trò khác nhau : 1 nhà sản xuất công việc,1 người làm việc hoặc/và 1 bộ lắng nghe sự kiện<br>
 Producer có thể thêm nhiều công việc vào hàng đợi ngay cả khi không có consumer tại thời điểm đó:Hàng đợi cung cấp giao tiếp không đồng bộ<br>
 -Producers<br>
 Có thể thêm công việc vào hàng đợi :<br>
-```const myFirstQueue = new Bull('my-first-queue');
+```
+const myFirstQueue = new Bull('my-first-queue');
 
 const job = await myFirstQueue.add({
   foo: 'bar'
