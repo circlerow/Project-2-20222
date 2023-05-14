@@ -17,7 +17,7 @@ Một hàng đợi thường có 3 vai trò khác nhau : 1 nhà sản xuất cô
 Producer có thể thêm nhiều công việc vào hàng đợi ngay cả khi không có consumer tại thời điểm đó:Hàng đợi cung cấp giao tiếp không đồng bộ<br>
 -Producers<br>
 Có thể thêm công việc vào hàng đợi :<br>
-`const myFirstQueue = new Bull('my-first-queue');
+```const myFirstQueue = new Bull('my-first-queue');
 
 const job = await myFirstQueue.add({
   foo: 'bar'
