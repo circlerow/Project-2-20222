@@ -76,7 +76,7 @@ myFirstQueue.on('completed', (job, result) => {
 })
 ```
 <br>
-![alt](https://optimalbits.github.io/bull/job-lifecycle.png)
+![markdown](https://optimalbits.github.io/bull/job-lifecycle.png)
 
 
 
