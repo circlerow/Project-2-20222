@@ -6,7 +6,8 @@ Sử dụng thư viện mã nguồn mở codemirror-5.65.12 để xây dựng ch
 [Codemirror](https://codemirror.net/)<br>
 Nguồn: [Youtube](https://youtu.be/doS4X0NKnJk)
 ## Lưu snapshot
-Lịch sử các lần compile sẽ được lưu lại tại file temp bằng phương thức endpoint API
+Lịch sử các lần compile sẽ được lưu lại tại file temp bằng phương thức endpoint API và xóa các file đã compile trước đó nếu cần thiết<br>
+
 ```
 app.get("/",function (req,res){ //app.get dùng để lấy dữ liệu từ form
     compiler.flush(function () { //compiler.flush dùng để xóa các file đã compile
@@ -62,6 +63,21 @@ myFirstQueue.process( async (job) => {
 });
 ``` 
 <br>
+
+### Listeners<br>
+Listener có thể lắng nghe cục bộ hoặc toàn cục<br>
+Có thể đính kèm 1 trình lắng nghe sự kiện cho 1 hàng đợi<br>
+```
+const myFirstQueue = new Bull('my-first-queue');
+
+// Define a local completed event
+myFirstQueue.on('completed', (job, result) => {
+  console.log(`Job completed with result ${result}`);
+})
+```
+<br>
+![alt](https://optimalbits.github.io/bull/job-lifecycle.png)
+
 
 
 
