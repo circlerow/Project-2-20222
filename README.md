@@ -77,7 +77,7 @@ myFirstQueue.on('completed', (job, result) => {
 ```
 ### Job Lifecycle<br>
 <br>
-![markdown](./job-lifecycle.png)
+![Hình ảnh minh họa](./job-lifecycle.png)<br>
 
 
 
