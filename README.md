@@ -24,5 +24,17 @@ const job = await myFirstQueue.add({
   foo: 'bar'
 });
 ```
+<br>
+Công việc là 1 javascript object và có thể có bất kỳ thuộc tính nào bạn muốn.Oject này cần phải tuần tự hóa, cụ thể hơn là 1 chuỗi JSON,chính là cách lưu trữ trên Redis <br>
+-Consumers<br>
+Là một chương trình Node định nghĩa 1 hàm tiến trình để xử lí công việc<br>
+```
+const myFirstQueue = new Bull('my-first-queue');
+
+myFirstQueue.process(async (job) => {
+  return doSomething(job.data);
+});
+```
+<br>
 
 
