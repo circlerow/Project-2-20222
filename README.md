@@ -75,8 +75,9 @@ myFirstQueue.on('completed', (job, result) => {
   console.log(`Job completed with result ${result}`);
 })
 ```
+### Job Lifecycle<br>
 <br>
-![markdown](https://optimalbits.github.io/bull/job-lifecycle.png)
+![markdown](./job-lifecycle.png)
 
 
 
