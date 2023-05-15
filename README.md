@@ -122,5 +122,7 @@ transcoderQueue.process('audio', processAudio);
 transcoderQueue.process('video', processVideo);
 ```
 ## Tìm hiểu về Redis<br>
+### Cài đặt Redis
+Cài đặt redis từ [trang chủ](https://github.com/MicrosoftArchive/redis/releases)
 Đang trong quá trình tìm hiểu .....
 
