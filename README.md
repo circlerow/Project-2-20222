@@ -123,7 +123,8 @@ transcoderQueue.process('video', processVideo);
 ```
 ## Tìm hiểu về Redis<br>
 ### Cài đặt Redis
-Cài đặt redis từ [trang chủ](https://github.com/MicrosoftArchive/redis/releases)
-Huớng dẫn cài đặt [đây](https://stackjava.com/redis/huong-dan-cai-dat-redis-server-tren-windows.html)
+Cài đặt redis từ [trang chủ](https://github.com/MicrosoftArchive/redis/releases)<br>
+Huớng dẫn cài đặt [đây](https://stackjava.com/redis/huong-dan-cai-dat-redis-server-tren-windows.html)<br>
+Sử dựng thông qua cổng 127.0.0.1:6379<br>
 Đang trong quá trình tìm hiểu .....
 
