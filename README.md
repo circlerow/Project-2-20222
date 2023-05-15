@@ -121,5 +121,6 @@ transcoderQueue.process('image', processImage);
 transcoderQueue.process('audio', processAudio);
 transcoderQueue.process('video', processVideo);
 ```
-
+## Tìm hiểu về Redis<br>
+Đang trong quá trình tìm hiểu .....
 
