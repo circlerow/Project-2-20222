@@ -16,7 +16,7 @@ app.get("/",function (req,res){ //app.get dùng để lấy dữ liệu từ for
     res.sendFile("G:/Web Project/Simple-Compiler/index.html")//res.sendFile dùng để gửi file index.html
 })
 ```
-## Xây dựng hàng đợi 
+### Xây dựng hàng đợi 
 Xây dựng hàng đợi để xác định thứ tự các lần compile tránh trường hợp nhiều người cùng compile cùng lúc.<br>
 Xây dựng hàng đợi bằng thư viện Node Bull dựa trên nền tảng Redis<br>
 [Thư viện Bull](https://optimalbits.github.io/bull/)<br>
@@ -24,7 +24,7 @@ Xây dựng hàng đợi bằng thư viện Node Bull dựa trên nền tảng R
 `const myFirstQueue = new Bull('my-first-queue');`<br>
 Một hàng đợi thường có 3 vai trò khác nhau : 1 nhà sản xuất công việc,1 người làm việc hoặc/và 1 bộ lắng nghe sự kiện<br>
 Producer có thể thêm nhiều công việc vào hàng đợi ngay cả khi không có consumer tại thời điểm đó:Hàng đợi cung cấp giao tiếp không đồng bộ<br>
-### Producers<br>
+#### Producers<br>
 Có thể thêm công việc vào hàng đợi :<br>
 ```
 const myFirstQueue = new Bull('my-first-queue');
@@ -36,7 +36,7 @@ const job = await myFirstQueue.add({
 <br>
 Công việc là 1 javascript object và có thể có bất kỳ thuộc tính nào bạn muốn.Oject này cần phải tuần tự hóa, cụ thể hơn là 1 chuỗi JSON,chính là cách lưu trữ trên Redis <br>
 
-### Consumers<br>
+#### Consumers<br>
 Là một chương trình Node định nghĩa 1 hàm tiến trình để xử lí công việc<br>
 
 ```
@@ -64,7 +64,7 @@ myFirstQueue.process( async (job) => {
 ``` 
 <br>
 
-### Listeners<br>
+#### Listeners<br>
 Listener có thể lắng nghe cục bộ hoặc toàn cục<br>
 Có thể đính kèm 1 trình lắng nghe sự kiện cho 1 hàng đợi<br>
 ```
@@ -75,7 +75,7 @@ myFirstQueue.on('completed', (job, result) => {
   console.log(`Job completed with result ${result}`);
 })
 ```
-### Job Lifecycle<br>
+#### Job Lifecycle<br>
 <br>
 
 ![Hình ảnh minh họa](./job-lifecycle.jpeg)<br>
@@ -94,8 +94,32 @@ queue.on('global:completed', jobId => {
 ```
 Các sự kiện khác:<br>
 [Tài liệu tham khảo](https://github.com/OptimalBits/bull/blob/master/REFERENCE.md#eventsk)
-
-
-
+### Queue Options<br>
+#### Rate Limiter<br>
+Có thể đặt cho hàng đợi số lượng công việc xử lý trên 1 đơn vị thời gian<br>
+```
+// Limit queue to max 1.000 jobs per 5 seconds.
+const myRateLimitedQueue = new Queue('rateLimited', {
+  limiter: {
+    max: 1000,
+    duration: 5000
+  }
+})
+```
+Khi đạt đến giới hạn công việc request sẽ tham gia hàng đợi delay<br>
+#### Named Jobs<br>
+Có thể đặt tên cho các công việc trong hàng đợi giúp hàng đợi rõ ràng trực quan hơn<br>
+```
+// Jobs producer
+const myJob = await transcoderQueue.add('image', { input: 'myimagefile' });
+const myJob = await transcoderQueue.add('audio', { input: 'myaudiofile' });
+const myJob = await transcoderQueue.add('video', { input: 'myvideofile' });
+```
+```
+// Worker
+transcoderQueue.process('image', processImage);
+transcoderQueue.process('audio', processAudio);
+transcoderQueue.process('video', processVideo);
+```
 
 
