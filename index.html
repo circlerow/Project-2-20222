@@ -52,20 +52,20 @@
     </div>
 </body>
 <script>
-    var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
-        mode: "text/x-c++src",
-        theme: "dracula",
-        lineNumbers: true,
-        autoCloseBrackets: true,
+    var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {//tạo ra một editor mới từ textarea
+        mode: "text/x-c++src",//
+        theme: "dracula",//giao diện dracule
+        lineNumbers: true,//đánh dấu số dòng
+        autoCloseBrackets: true,//tự động đóng ngoặc
 
     })
-    var width = window.innerWidth
+    var width = window.innerWidth//lấy chiều rộng của màn hình
     var input = document.getElementById("input")
     var output = document.getElementById("output")
     var run = document.getElementById("run")
-    editor.setSize(0.7 * width, "500")
+    editor.setSize(0.7 * width, "500")//set kích thước cho editor
     var option = document.getElementById("inlineFormSelectPref")
-    option.addEventListener("change", function () {
+    option.addEventListener("change", function () {//thay đổi ngôn ngữ, với từng ngôn ngữ được chọn sẽ có mode khác nhau
         if (option.value == "Java") {
             editor.setOption("mode", "text/x-java")
         }
@@ -77,22 +77,22 @@
         }
     })
     var code;
-    run.addEventListener("click", async function () {
-        code = {
+    run.addEventListener("click", async function () {//Khi chick vào nút run thì hàm async sẽ chạy
+        code = {//tạo 1 object chứa code, input, ngôn ngữ
             code: editor.getValue(),
             input: input.value,
             lang: option.value
         }
         console.log(code)
-        var oData = await fetch("http://localhost:8000/compile", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
+        var oData = await fetch("http://localhost:8000/compile", { //gửi request đến server
+            method: "POST",//phương thức post
+            headers: {//thông tin phần header
+                "Content-Type": "application/json"//kiểu dữ liệu là json
             },
-            body: JSON.stringify(code)
+            body: JSON.stringify(code)//thông tin phần body. Ở đây là object code được chuyển thành json
         })
-        var d = await oData.json()
-        output.value = d.output
+        var d = await oData.json()//chuyển dữ liệu nhận được thành json
+        output.value = d.output//giá trị của output sẽ là output nhận được từ server
     })
 </script>
 

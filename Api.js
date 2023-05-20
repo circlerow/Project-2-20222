@@ -5,8 +5,7 @@ const compiler=require("compilex") //compiler dùng để compile code
 const option={stats:true} //option dùng để lưu trữ các thông tin về code
 compiler.init(option) //compiler.init dùng để khởi tạo compiler
 app.use(bodyP.json())  //app.use(bodyP.json()) dùng để lấy dữ liệu từ form
-app.use("/codemirror-5.65.12",express.static("G:/Web Project/Simple-Compiler/codemirror-5.65.12")) 
-//app.use("/codemirror-5.65.12",express.static("G:/Web Project/Simple-Compiler/codemirror-5.65.12")) dùng để lấy các file trong thư mục codemirror-5.65.12   
+app.use("/codemirror-5.65.12",express.static("G:/Web Project/Simple-Compiler/codemirror-5.65.12")) //dùng để lấy các file trong thư mục codemirror-5.65.12   
 app.get("/",function (req,res){ //app.get dùng để lấy dữ liệu từ form
     compiler.flush(function () { //compiler.flush dùng để xóa các file đã compile
         console.log("deleted") //in ra màn hình console

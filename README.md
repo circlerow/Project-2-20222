@@ -4,6 +4,9 @@ Tiến độ nghiên cứu môn học project 2
 ## Xây dựng chương trình compiler trên local
 Sử dụng thư viện mã nguồn mở codemirror-5.65.12 để xây dựng chương trình compiler trên local<br>
 [Codemirror](https://codemirror.net/)<br>
+Client sẽ nhận dữ liệu được nhập vào từ người dùng qua phần editor và gửi lên sever dưới dạng chuỗi JSON để xử lý theo phương thức POST<br>
+Sau khi nhận được dữ liệu từ client,sever sẽ xử lý dữ liệu bằng thư viện Codemirror và trả về kết quả cho client<br>
+```
 Nguồn: [Youtube](https://youtu.be/doS4X0NKnJk)
 ## Lưu snapshot
 Lịch sử các lần compile sẽ được lưu lại tại file temp bằng phương thức endpoint API và xóa các file đã compile trước đó nếu cần thiết<br>
@@ -125,6 +128,11 @@ transcoderQueue.process('video', processVideo);
 ### Cài đặt Redis
 Cài đặt redis từ [trang chủ](https://github.com/MicrosoftArchive/redis/releases).
 Huớng dẫn cài đặt chi tiết tại [đây](https://stackjava.com/redis/huong-dan-cai-dat-redis-server-tren-windows.html).<br>
-Hệ thống được sử dựng thông qua cổng 127.0.0.1:6379<br>
+Hệ thống được sử dựng thông qua cổng: 127.0.0.1:6379<br>
+#### Sử dụng redis trong Nodejs thông qua thư viện [node-redis](https://github.com/redis/node-redis#installation)
+##### Cài đặt
+`npm install redis`<br>
+##### Cách sử dụng
+
 Đang trong quá trình tìm hiểu .....
 
