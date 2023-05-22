@@ -135,6 +135,6 @@ Hệ thống được sử dựng thông qua cổng: 127.0.0.1:6379<br>
 ##### Cách sử dụng
 
 ### Sử dụng docker để cài đặt redis 
-Hướng dẫn cách sử dụng tại [đây](https://topdev.vn/blog/cai-dat-redis-su-dung-docker/)
+Hướng dẫn cách sử dụng tại [đây](https://topdev.vn/blog/cai-dat-redis-su-dung-docker/).<br>
 Sử dụng Docker Desktop và RedisInsight
 
