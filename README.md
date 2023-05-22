@@ -6,7 +6,7 @@ Sử dụng thư viện mã nguồn mở codemirror-5.65.12 để xây dựng ch
 [Codemirror](https://codemirror.net/)<br>
 Client sẽ nhận dữ liệu được nhập vào từ người dùng qua phần editor và gửi lên sever dưới dạng chuỗi JSON để xử lý theo phương thức POST<br>
 Sau khi nhận được dữ liệu từ client,sever sẽ xử lý dữ liệu bằng thư viện Codemirror và trả về kết quả cho client<br>
-```
+
 Nguồn: [Youtube](https://youtu.be/doS4X0NKnJk)
 ## Lưu snapshot
 Lịch sử các lần compile sẽ được lưu lại tại file temp bằng phương thức endpoint API và xóa các file đã compile trước đó nếu cần thiết<br>
@@ -134,5 +134,7 @@ Hệ thống được sử dựng thông qua cổng: 127.0.0.1:6379<br>
 `npm install redis`<br>
 ##### Cách sử dụng
 
-Đang trong quá trình tìm hiểu .....
+### Sử dụng docker để cài đặt redis 
+Hướng dẫn cách sử dụng tại [đây](https://topdev.vn/blog/cai-dat-redis-su-dung-docker/)
+Sử dụng Docker Desktop và RedisInsight
 
