@@ -7,9 +7,10 @@ let createdata = async (req, res) => {
     return;
 };
 
-let savedata = async (req, res, data) => {
+let savedata = async (data) => {
     console.log("check:", data);
-    let data1 = data;
+    let data1 = data.output;
+    console.log("check:", data1, typeof (data1))
     await pool.execute('insert into result(result) values (?)', [data1]);
     return;
 };

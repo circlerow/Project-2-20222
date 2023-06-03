@@ -43,7 +43,7 @@ app.post("/compile", async (req, res) => {
                 compiler.compileCPPWithInput(envData, code, input, async (data) => {
                     if (data.output) {
                         res.send(data);
-
+                        Controller.savedata(data);
                     }
                     else {
                         res.send({ output: "error" })
