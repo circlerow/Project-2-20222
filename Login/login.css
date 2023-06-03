@@ -1,0 +1,40 @@
+body {
+    background: #55b8d1;
+}
+
+
+.login-container {
+    margin-top: 20px;
+    width: 400px;
+    height: 660px;
+    padding: 40px;
+    background: #f0f400;
+    border: 1px solid #eaeaea;
+    border-radius: 25px;
+    float: right;
+}
+
+.picture-container {
+    margin-right: 1000px;
+    height: 660px;
+    width: 400px;
+}
+
+.login-container button {
+
+    margin-top: 150px;
+}
+
+.login-container label {
+    margin-bottom: 10px;
+}
+
+h2 {
+    text-align: center;
+}
+
+img {
+    width: 800px;
+    height: 800px;
+    margin-bottom: 20px;
+}
