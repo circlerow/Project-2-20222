@@ -138,3 +138,8 @@ Hệ thống được sử dựng thông qua cổng: 127.0.0.1:6379<br>
 Hướng dẫn cách sử dụng tại [đây](https://topdev.vn/blog/cai-dat-redis-su-dung-docker/).<br>
 Sử dụng Docker Desktop và RedisInsight
 
+#### Thêm dữ liệu vào DB
+Sử dụng createPool của mysql2/promise để thêm dữ liệu vào DB<br>
+Sau đó bắt 2 luồng dữ liệu vào DB<br>
+Luồng thứ nhất là input,lấy từ request của client<br>
+Luồng thứ 2 là output,lấy từ dữ liệu sau khi biên dịch<br>
