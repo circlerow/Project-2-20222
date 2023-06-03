@@ -32,6 +32,7 @@ app.post("/compile", async (req, res) => {
                 compiler.compileCPP(envData, code, (data) => {
                     if (data.output) {
                         res.send(data);//gửi dữ liệu về cho client
+                        Controller.savedata(data)
                     }
                     else {
                         res.send({ output: "error" })//gửi dữ liệu về cho client
@@ -47,6 +48,7 @@ app.post("/compile", async (req, res) => {
                     }
                     else {
                         res.send({ output: "error" })
+                        Controller.savedata({ output: "error" })
                     }
                 });
             }
@@ -57,9 +59,12 @@ app.post("/compile", async (req, res) => {
                 compiler.compileJava(envData, code, function (data) {
                     if (data.output) {
                         res.send(data);
+                        Controller.savedata(data)
                     }
                     else {
                         res.send({ output: "error" })
+                        Controller.savedata({ output: "error" })
+
                     }
                 })
             }
@@ -70,9 +75,13 @@ app.post("/compile", async (req, res) => {
                 compiler.compileJavaWithInput(envData, code, input, function (data) {
                     if (data.output) {
                         res.send(data);
+                        Controller.savedata(data)
+
                     }
                     else {
                         res.send({ output: "error" })
+                        Controller.savedata({ output: "error" })
+
                     }
                 })
             }
@@ -83,9 +92,14 @@ app.post("/compile", async (req, res) => {
                 compiler.compilePython(envData, code, function (data) {
                     if (data.output) {
                         res.send(data);
+                        Controller.savedata(data)
+                        Controller.savedata({ output: "error" })
+
                     }
                     else {
                         res.send({ output: "error" })
+                        Controller.savedata({ output: "error" })
+
                     }
                 });
             }
@@ -94,9 +108,12 @@ app.post("/compile", async (req, res) => {
                 compiler.compilePythonWithInput(envData, code, input, function (data) {
                     if (data.output) {
                         res.send(data);
+                        Controller.savedata(data)
                     }
                     else {
                         res.send({ output: "error" })
+                        Controller.savedata({ output: "error" })
+
                     }
                 });
             }
