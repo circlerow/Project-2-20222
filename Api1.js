@@ -14,15 +14,17 @@ app.get("/", function (req, res) { //app.get dùng để lấy dữ liệu từ 
     compiler.flush(function () { //compiler.flush dùng để xóa các file đã compile
         console.log("deleted") //in ra màn hình console
     })
-    res.sendFile("G:/Web Project/Simple-Compiler/index.html")//res.sendFile dùng để gửi file index.html
+    // res.sendFile("G:/Project-2-20222/index.html")//res.sendFile dùng để gửi file index.html
+    res.sendFile("G:/Project-2-20222/login.html")
 })
+app.get("/index", (req, res) => {
+    res.sendFile("G:/Project-2-20222/index.html")
+})
+
 app.post("/compile", async (req, res) => {
     var code = req.body.code //lấy code từ form
     var input = req.body.input //lấy input từ form
     var lang = req.body.lang //lấy ngôn ngữ từ form
-    console.log("code", code) //in ra màn hình console
-    console.log("input", input) //in ra màn hình console
-    console.log("lang", lang) //in ra màn hình console
     await Controller.createdata(req);
     try {
 
@@ -93,7 +95,6 @@ app.post("/compile", async (req, res) => {
                     if (data.output) {
                         res.send(data);
                         Controller.savedata(data)
-                        Controller.savedata({ output: "error" })
 
                     }
                     else {
