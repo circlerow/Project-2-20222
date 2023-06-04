@@ -1,4 +1,5 @@
-const { pool } = require('./connectDB.js');
+import pool from "./connectDB.js";
+
 
 let createdata = async (req, res) => {
     console.log("check INPUT:", req.body);
@@ -16,9 +17,10 @@ let savedata = async (data) => {
 };
 
 let logindata = async (username, password) => {
+    console.log("check INPUT:", username, password);
     const [row] = await pool.execute('select * from logindata where username = ? and password = ?', [username, password]);
     return row.length;
 }
-module.exports = {
+export default {
     createdata, savedata, logindata
 };

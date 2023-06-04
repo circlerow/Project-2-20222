@@ -143,3 +143,6 @@ Sử dụng createPool của mysql2/promise để thêm dữ liệu vào DB<br>
 Sau đó bắt 2 luồng dữ liệu vào DB<br>
 Luồng thứ nhất là input,lấy từ request của client<br>
 Luồng thứ 2 là output,lấy từ dữ liệu sau khi biên dịch<br>
+
+#### Tạo trang đăng nhập
+

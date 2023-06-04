@@ -1,15 +1,17 @@
-const express = require("express")
+import express from 'express';
 const app = express()        //Khởi tạo ứng dụng 
-const bodyP = require("body-parser") //body-parser dùng để lấy dữ liệu từ form
-const compiler = require("compilex") //compiler dùng để compile code
+import bodyP from 'body-parser';
+import compiler from 'compilex';
 const option = { stats: true } //option dùng để lưu trữ các thông tin về code
-const Controller = require("./Controller.js")
+import controller from "./controller.js";
 compiler.init(option) //compiler.init dùng để khởi tạo compiler
 
 
 app.use(bodyP.json())  //app.use(bodyP.json()) dùng để lấy dữ liệu từ form
-app.use("/codemirror-5.65.12", express.static("G:/Web Project/Simple-Compiler/codemirror-5.65.12")) //dùng để lấy các file trong thư mục codemirror-5.65.12   
-
+app.use("/codemirror-5.65.12", express.static("G:/Project-2-20222/codemirror-5.65.12")) //dùng để lấy các file trong thư mục codemirror-5.65.12   
+app.use("/login.css", express.static("G:/Project-2-20222/login.css")) //dùng để lấy các file trong thư mục css
+app.use("/controller.js", express.static("G:/Project-2-20222/controller.js")) //dùng để lấy các file trong thư mục css
+app.use("/login.js", express.static("G:/Project-2-20222/login.js")) //dùng để lấy các file trong thư mục css
 app.get("/", function (req, res) { //app.get dùng để lấy dữ liệu từ form
     compiler.flush(function () { //compiler.flush dùng để xóa các file đã compile
         console.log("deleted") //in ra màn hình console
@@ -25,7 +27,7 @@ app.post("/compile", async (req, res) => {
     var code = req.body.code //lấy code từ form
     var input = req.body.input //lấy input từ form
     var lang = req.body.lang //lấy ngôn ngữ từ form
-    await Controller.createdata(req);
+    await controller.createdata(req);
     try {
 
         if (lang == "Cpp") {
@@ -34,7 +36,7 @@ app.post("/compile", async (req, res) => {
                 compiler.compileCPP(envData, code, (data) => {
                     if (data.output) {
                         res.send(data);//gửi dữ liệu về cho client
-                        Controller.savedata(data)
+                        controller.savedata(data)
                     }
                     else {
                         res.send({ output: "error" })//gửi dữ liệu về cho client
@@ -46,11 +48,11 @@ app.post("/compile", async (req, res) => {
                 compiler.compileCPPWithInput(envData, code, input, async (data) => {
                     if (data.output) {
                         res.send(data);
-                        Controller.savedata(data);
+                        controller.savedata(data);
                     }
                     else {
                         res.send({ output: "error" })
-                        Controller.savedata({ output: "error" })
+                        controller.savedata({ output: "error" })
                     }
                 });
             }
@@ -61,11 +63,11 @@ app.post("/compile", async (req, res) => {
                 compiler.compileJava(envData, code, function (data) {
                     if (data.output) {
                         res.send(data);
-                        Controller.savedata(data)
+                        controller.savedata(data)
                     }
                     else {
                         res.send({ output: "error" })
-                        Controller.savedata({ output: "error" })
+                        controller.savedata({ output: "error" })
 
                     }
                 })
@@ -77,12 +79,12 @@ app.post("/compile", async (req, res) => {
                 compiler.compileJavaWithInput(envData, code, input, function (data) {
                     if (data.output) {
                         res.send(data);
-                        Controller.savedata(data)
+                        controller.savedata(data)
 
                     }
                     else {
                         res.send({ output: "error" })
-                        Controller.savedata({ output: "error" })
+                        controller.savedata({ output: "error" })
 
                     }
                 })
@@ -94,12 +96,12 @@ app.post("/compile", async (req, res) => {
                 compiler.compilePython(envData, code, function (data) {
                     if (data.output) {
                         res.send(data);
-                        Controller.savedata(data)
+                        controller.savedata(data)
 
                     }
                     else {
                         res.send({ output: "error" })
-                        Controller.savedata({ output: "error" })
+                        controller.savedata({ output: "error" })
 
                     }
                 });
@@ -109,11 +111,11 @@ app.post("/compile", async (req, res) => {
                 compiler.compilePythonWithInput(envData, code, input, function (data) {
                     if (data.output) {
                         res.send(data);
-                        Controller.savedata(data)
+                        controller.savedata(data)
                     }
                     else {
                         res.send({ output: "error" })
-                        Controller.savedata({ output: "error" })
+                        controller.savedata({ output: "error" })
 
                     }
                 });
