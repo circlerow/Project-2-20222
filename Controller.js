@@ -19,6 +19,7 @@ let savedata = async (data) => {
 let logindata = async (username, password) => {
     console.log("check INPUT:", username, password);
     const [row] = await pool.execute('select * from logindata where username = ? and password = ?', [username, password]);
+    console.log("check:", row.length)
     return row.length;
 }
 export default {

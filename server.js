@@ -19,6 +19,19 @@ app.get("/", function (req, res) { //app.get dùng để lấy dữ liệu từ 
     // res.sendFile("G:/Project-2-20222/index.html")//res.sendFile dùng để gửi file index.html
     res.sendFile("G:/Project-2-20222/login.html")
 })
+app.post("/login", async (req, res) => {
+    console.log("check:", req.body)
+    const rowCount = await controller.logindata(req.body.username, req.body.password)
+    console.log("checkrow:", rowCount)
+    if (rowCount > 0) {
+        res.send({ status: "success" })
+    }
+    else {
+        res.send({ status: "fail" })
+    }
+
+})
+
 app.get("/index", (req, res) => {
     res.sendFile("G:/Project-2-20222/index.html")
 })
