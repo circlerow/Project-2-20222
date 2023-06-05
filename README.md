@@ -145,4 +145,4 @@ Luồng thứ nhất là input,lấy từ request của client<br>
 Luồng thứ 2 là output,lấy từ dữ liệu sau khi biên dịch<br>
 
 #### Tạo trang đăng nhập
-
+Tạo giao diện đăng nhập,2 trường nhập là username và password<br>
