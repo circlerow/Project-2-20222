@@ -3,10 +3,12 @@ const app = express()        //Khởi tạo ứng dụng
 import bodyP from 'body-parser';
 import compiler from 'compilex';
 const option = { stats: true } //option dùng để lưu trữ các thông tin về code
-import controller from "./controller.js";
+import controller from "./src/controller/Controller.js";
+import configViewEngine from './src/config/viewEngine.js'
+
 compiler.init(option) //compiler.init dùng để khởi tạo compiler
 
-
+configViewEngine(app);
 app.use(bodyP.json())  //app.use(bodyP.json()) dùng để lấy dữ liệu từ form
 app.use("/codemirror-5.65.12", express.static("G:/Project-2-20222/codemirror-5.65.12")) //dùng để lấy các file trong thư mục codemirror-5.65.12   
 app.use("/login.css", express.static("G:/Project-2-20222/login.css")) //dùng để lấy các file trong thư mục css
@@ -17,7 +19,7 @@ app.get("/", function (req, res) { //app.get dùng để lấy dữ liệu từ 
         console.log("deleted") //in ra màn hình console
     })
     // res.sendFile("G:/Project-2-20222/index.html")//res.sendFile dùng để gửi file index.html
-    res.sendFile("G:/Project-2-20222/login.html")
+    res.sendFile("G:/Project-2-20222/src/view/login.html")
 })
 app.post("/login", async (req, res) => {
     console.log("check:", req.body)
@@ -33,7 +35,7 @@ app.post("/login", async (req, res) => {
 })
 
 app.get("/index", (req, res) => {
-    res.sendFile("G:/Project-2-20222/index.html")
+    res.sendFile("G:/Project-2-20222/src/view/index.html")
 })
 
 app.post("/compile", async (req, res) => {

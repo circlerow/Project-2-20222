@@ -1,4 +1,4 @@
-import pool from "./connectDB.js";
+import pool from "../config/connectDB.js";
 
 
 let createdata = async (req, res) => {

@@ -1,7 +1,7 @@
 body {
-    background: #55b8d1;
+    background: url("../img/pic.jpg") no-repeat;
+    background-size: cover;
 }
-
 
 .login-container {
     margin-top: 20px;
