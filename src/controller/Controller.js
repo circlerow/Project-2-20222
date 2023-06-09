@@ -22,6 +22,25 @@ let logindata = async (username, password) => {
     console.log("check:", row.length)
     return row.length;
 }
+
+let getExample = async (req, res) => {
+
+
+    const [rows, fields] = await pool.execute('SELECT * FROM example');
+
+
+    return res.render('example.ejs', { dataExample: rows });
+}
+
+let getDetailExample = async (req, res) => {
+    let exampleId = req.params.id;
+    let example = await pool.execute(`select * from example where Id = ?`, [exampleId]);
+    let info = JSON.stringify(example[0]);
+    const obj = JSON.parse(info)
+    console.log("check:", obj[0].Id)
+    return res.render('exampleDetail.ejs', { info: obj });
+}
+
 export default {
-    createdata, savedata, logindata
+    createdata, savedata, logindata, getExample, getDetailExample
 };

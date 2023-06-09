@@ -18,9 +18,10 @@ app.get("/", function (req, res) { //app.get dùng để lấy dữ liệu từ 
     compiler.flush(function () { //compiler.flush dùng để xóa các file đã compile
         console.log("deleted") //in ra màn hình console
     })
-    // res.sendFile("G:/Project-2-20222/index.html")//res.sendFile dùng để gửi file index.html
-    res.sendFile("G:/Project-2-20222/src/view/login.html")
+    res.sendFile("G:/Project-2-20222/src/view/login.ejs")
 })
+app.get("/example", controller.getExample)
+app.get("/detail/example/:id", controller.getDetailExample)
 app.post("/login", async (req, res) => {
     console.log("check:", req.body)
     const rowCount = await controller.logindata(req.body.username, req.body.password)
@@ -35,7 +36,7 @@ app.post("/login", async (req, res) => {
 })
 
 app.get("/index", (req, res) => {
-    res.sendFile("G:/Project-2-20222/src/view/index.html")
+    res.sendFile("G:/Project-2-20222/src/view/index.ejs")
 })
 
 app.post("/compile", async (req, res) => {

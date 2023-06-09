@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example</title>
+</head>
+
+<body>
+    <div class="w3-container">
+        <h2>Danh sách bài tập</h2>
+        <table class="w3-table-all w3-hoverable">
+            <thead>
+                <tr class="w3-light-grey">
+                    <th>Id</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(let i=0; i < dataExample.length; i++) { %>
+                    <tr>
+                        <td>
+                            <%= dataExample[i].Id %>
+                        </td>
+                        <td>
+                            <%= dataExample[i].content %>
+                        </td>
+                        <td>
+                            <button type="button"><a href="/detail/example/<%= dataExample[i].Id%>" target="_blank">Giải
+                                    bài tập</a></button>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+
+
+        </table>
+    </div>
+</body>
+
+</html>
