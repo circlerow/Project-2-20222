@@ -147,7 +147,7 @@ let compilerMachine = async (req, res) => {
     }
 }
 let compilePage = (req, res) => {
-    res.sendFile("G:/Project-2-20222/src/view/index.ejs")
+    res.render("G:/Project-2-20222/src/view/index.ejs")
 }
 let loginDataCheck = async (req, res) => {
     console.log("check:", req.body)

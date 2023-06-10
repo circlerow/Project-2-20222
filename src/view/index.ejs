@@ -85,15 +85,15 @@
             lang: option.value
         }
         console.log(code)
-        var oData = await fetch("http://localhost:8000/compile", { //gửi request đến server
-            method: "POST",//phương thức post
-            headers: {//thông tin phần header
-                "Content-Type": "application/json"//kiểu dữ liệu là json
+        var oData = await fetch("http://localhost:8000/compile", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
             },
-            body: JSON.stringify(code)//thông tin phần body. Ở đây là object code được chuyển thành json
+            body: JSON.stringify(code)
         })
-        var d = await oData.json()//chuyển dữ liệu nhận được thành json
-        output.value = d.output//giá trị của output sẽ là output nhận được từ server
+        var d = await oData.json()
+        output.value = d.output
     })
 </script>
 

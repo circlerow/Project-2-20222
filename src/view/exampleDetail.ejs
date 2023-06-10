@@ -16,24 +16,72 @@
 
         <h3>Đề bài: <%= info[0].content %>
         </h3>
+        <p>
+            Input: <%= info[0].input1 %>
+                Output: <%= info[0].output1 %>
+        </p>
 
     </div>
     <div>
         <h3>Nộp Bài Tập</h3>
-        <form action="" method="POST">
-            <div class="col-12 w-25">
-                <label class="visually-hidden" for="inlineFormSelectPref">Chọn ngôn ngữ</label>
-                <select class="form-select" id="inlineFormSelectPref">
-                    <option selected>Choose...</option>
-                    <option value="Java">Java</option>
-                    <option value="Cpp">Cpp</option>
-                    <option value="python">python</option>
-                </select>
-            </div>
-            <textarea name="answer" id="answer" cols="30" rows="10"></textarea>
+        <div class="col-12 w-25">
+            <label class="visually-hidden" for="inlineFormSelectPref">Chọn ngôn ngữ</label>
+            <select class="form-select" id="inlineFormSelectPref">
+                <option selected>Choose...</option>
+                <option value="Java">Java</option>
+                <option value="Cpp">Cpp</option>
+                <option value="python">python</option>
+            </select>
+        </div>
+        <textarea name="answer" id="answer" cols="30" rows="10"></textarea>
 
-            <button type="submit">Nộp bài</button>
-        </form>
+        <button type="submit" id="run">Nộp bài</button>
+
+        <script>
+            var input = '<%= info[0].input1 %>'
+            var output = '<%= info[0].output1 %>'
+            var option = document.getElementById("answer")
+            var run = document.getElementById("run");
+            var lang = document.getElementById("inlineFormSelectPref");
+
+            run.addEventListener("click", async function () {
+                console.log("input:", input);
+                console.log("output:", output);
+                code = {
+                    code: option.value,
+                    input: input,
+                    lang: lang.value
+                };
+
+                console.log(code);
+
+
+                var oData = await fetch("http://localhost:8000/compile", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(code)
+                });
+
+                var d = await oData.json();
+                var output_value = d.output;
+                if (output_value == output) {
+                    document.getElementById("output").innerHTML = "Đúng";
+                }
+                else {
+                    document.getElementById("output").innerHTML = "Sai";
+                }
+
+            });
+        </script>
+
+        <div id="output"></div>
+
+
+
+
+
 
 
     </div>
