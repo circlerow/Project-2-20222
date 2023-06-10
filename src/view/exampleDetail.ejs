@@ -36,53 +36,56 @@
         <textarea name="answer" id="answer" cols="30" rows="10"></textarea>
 
         <button type="submit" id="run">Nộp bài</button>
-
         <script>
-            var input = '<%= info[0].input1 %>'
-            var output = '<%= info[0].output1 %>'
-            var option = document.getElementById("answer")
-            var run = document.getElementById("run");
-            var lang = document.getElementById("inlineFormSelectPref");
 
             run.addEventListener("click", async function () {
-                console.log("input:", input);
-                console.log("output:", output);
-                code = {
-                    code: option.value,
-                    input: input,
-                    lang: lang.value
+                var inputArray = [`<%= info[0].input1 %>`, `<%= info[0].input2 %>`, `<%= info[0].input3 %>`, `<%= info[0].input4 %>`, `<%= info[0].input5 %>`];
+                var outputArray = [`<%= info[0].output1 %>`, `<%= info[0].output2 %>`, `<%= info[0].output3 %>`, `<%= info[0].output4 %>`, `<%= info[0].output5 %>`];
+                for (let index = 1; index <= 5; index++) {
+                    var input = inputArray[index - 1];
+                    var output = outputArray[index - 1];
+                    var option = document.getElementById("answer")
+                    var run = document.getElementById("run");
+                    var lang = document.getElementById("inlineFormSelectPref");
+
+
+                    console.log("input:", input);
+                    console.log("output:", output);
+                    code = {
+                        code: option.value,
+                        input: input,
+                        lang: lang.value
+                    };
+                    console.log(code);
+                    var oData = await fetch("http://localhost:8000/compile", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(code)
+                    });
+                    var d = await oData.json();
+                    var output_value = d.output;
+                    if (output_value == output) {
+                        document.getElementById("output" + index).innerHTML = "Đúng";
+                    }
+                    else {
+                        document.getElementById("output" + index).innerHTML = "Sai";
+                    }
+
                 };
-
-                console.log(code);
-
-
-                var oData = await fetch("http://localhost:8000/compile", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(code)
-                });
-
-                var d = await oData.json();
-                var output_value = d.output;
-                if (output_value == output) {
-                    document.getElementById("output").innerHTML = "Đúng";
-                }
-                else {
-                    document.getElementById("output").innerHTML = "Sai";
-                }
-
             });
+
+
         </script>
 
-        <div id="output"></div>
 
 
-
-
-
-
+        <div id="output1"></div>
+        <div id="output2"></div>
+        <div id="output3"></div>
+        <div id="output4"></div>
+        <div id="output5"></div>
 
     </div>
 
