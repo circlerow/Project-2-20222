@@ -23,22 +23,17 @@ let logindata = async (username, password) => {
     return row.length;
 }
 
-let getExample = async (req, res) => {
-
-
-    const [rows, fields] = await pool.execute('SELECT * FROM example');
-
-
-    return res.render('example.ejs', { dataExample: rows });
+let getExercise = async (req, res) => {
+    const [rows, fields] = await pool.execute('SELECT * FROM exercise');
+    return res.render('exercise.ejs', { dataExercise: rows });
 }
 
-let getDetailExample = async (req, res) => {
-    let exampleId = req.params.id;
-    let example = await pool.execute(`select * from example where Id = ?`, [exampleId]);
-    let info = JSON.stringify(example[0]);
+let getDetailExercise = async (req, res) => {
+    let exerciseId = req.params.id;
+    let exercise = await pool.execute(`select * from exercise where Id = ?`, [exerciseId]);
+    let info = JSON.stringify(exercise[0]);
     const obj = JSON.parse(info)
-    console.log("check:", obj[0].Id)
-    return res.render('exampleDetail.ejs', { info: obj });
+    return res.render('exerciseDetail.ejs', { info: obj });
 }
 
 let compilerMachine = async (req, res) => {
@@ -168,6 +163,6 @@ let reset = async (req, res) => {
     }
 }
 export default {
-    createdata, savedata, logindata, getExample, getDetailExample,
+    createdata, savedata, logindata, getExercise, getDetailExercise,
     compilerMachine, compilePage, loginDataCheck, reset
 };
