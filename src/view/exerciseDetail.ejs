@@ -9,6 +9,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/f8e2bc67ef.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../codemirror-5.65.12/lib/codemirror.css">
+    <script src="../../codemirror-5.65.12/mode/python/python.js"></script>
+    <script src="../../codemirror-5.65.12/lib/codemirror.js"></script>
+    <script src="../../codemirror-5.65.12/mode/clike/clike.js"></script>
+    <link rel="stylesheet" href="../../codemirror-5.65.12/theme/dracula.css">
+    <script src="../../codemirror-5.65.12/addon/edit/closebrackets.js"></script>
     <title>Giải bài tập</title>
 </head>
 
@@ -31,15 +37,22 @@
     <div class="row">
         <h3 class="h3-container">Nộp Bài Tập</h3>
 
-        <div class="col-8">
-            <div class="col-3 w-10 choose-container">
-                <label class="visually-hidden" for="inlineFormSelectPref">Chọn ngôn ngữ</label>
-                <select class="form-select" id="inlineFormSelectPref">
-                    <option selected>Choose...</option>
-                    <option value="Java">Java</option>
-                    <option value="Cpp">Cpp</option>
-                    <option value="python">python</option>
-                </select>
+        <div class="col-8" style="padding-left: 40px;">
+            <div class="col-8 w-10 ">
+                <div class="col-4 d-inline-block choose-container ">
+                    <label class="visually-hidden" for="inlineFormSelectPref">Chọn ngôn ngữ</label>
+                    <select class="form-select" id="inlineFormSelectPref">
+                        <option selected>Choose...</option>
+                        <option value="Java">Java</option>
+                        <option value="Cpp">Cpp</option>
+                        <option value="python">python</option>
+                    </select>
+                </div>
+                <div class="col-5 d-inline-block">
+                    <button type="button" class="btn btn-primary"><a href="/index" class="text-light">Chuyển đến trình
+                            biên
+                            dịch</a></button>
+                </div>
             </div>
             <textarea name="answer" id="answer" cols="20" rows="10"
                 class="form-control text-container rounded"></textarea>
@@ -56,6 +69,12 @@
     </div>
 
     <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("answer"), {//tạo ra một editor mới từ textarea
+            theme: "dracula",//giao diện dracule
+            lineNumbers: true,//đánh dấu số dòng
+            autoCloseBrackets: true,//tự động đóng ngoặc
+
+        })
 
         run.addEventListener("click", async function () {
             var inputArray = [`<%= info[0].input1 %>`, `<%= info[0].input2 %>`, `<%= info[0].input3 %>`, `<%= info[0].input4 %>`, `<%= info[0].input5 %>`];
@@ -63,7 +82,6 @@
             for (let index = 1; index <= 5; index++) {
                 var input = inputArray[index - 1];
                 var output = outputArray[index - 1];
-                var option = document.getElementById("answer")
                 var run = document.getElementById("run");
                 var lang = document.getElementById("inlineFormSelectPref");
 
@@ -71,10 +89,11 @@
                 console.log("input:", input);
                 console.log("output:", output);
                 code = {
-                    code: option.value,
+                    code: editor.getValue(),
                     input: input,
                     lang: lang.value
                 };
+                console.log(code);
                 var oData = await fetch("http://localhost:8000/compile", {
                     method: "POST",
                     headers: {
@@ -85,14 +104,14 @@
                 var d = await oData.json();
                 var output_value = d.output;
                 if (output_value == output) {
-                    document.getElementById("output" + index).innerHTML = "Test case" + index + ":Đúng  ";
+                    document.getElementById("output" + index).innerHTML = "Test case" + index + ": Đúng  ";
                     const checkIcon = document.createElement("i");
                     checkIcon.classList.add("fa-regular", "fa-circle-check");
                     document.getElementById("output" + index).appendChild(checkIcon);
                     document.getElementById("output" + index).style.color = "green";
                 }
                 else {
-                    document.getElementById("output" + index).innerHTML = "Test case" + index + ":Sai  ";
+                    document.getElementById("output" + index).innerHTML = "Test case" + index + ": Sai  ";
                     const checkIcon = document.createElement("i");
                     checkIcon.classList.add("fa-regular", "fa-circle-xmark");
                     document.getElementById("output" + index).appendChild(checkIcon);

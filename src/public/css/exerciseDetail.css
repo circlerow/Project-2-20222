@@ -29,23 +29,20 @@ body {
     margin-bottom: 20px;
 }
 
-.text-container {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 50px;
-}
+
 
 .choose-container {
     text-align: center;
     margin-top: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     margin-left: 50px;
 }
 
 .btn-container {
+    margin-top: 10px;
     text-align: center;
     margin-bottom: 20px;
-    margin-left: 570px;
+    margin-left: 500px;
 }
 
 .output-container {

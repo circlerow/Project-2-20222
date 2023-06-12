@@ -147,7 +147,12 @@ let loginDataCheck = async (req, res) => {
     console.log("check:", req.body)
     const rowCount = await logindata(req.body.username, req.body.password)
     console.log("checkrow:", rowCount)
-    if (rowCount > 0) {
+    console.log("check:", req.body.username, req.body.password)
+    let { username, password } = req.body;
+    if (username == "admin" && password == "1") {
+        res.send({ status: "admin" })
+    }
+    else if (rowCount > 0) {
         res.send({ status: "success" })
     }
     else {
@@ -173,7 +178,17 @@ let signupData = async (req, res) => {
     await pool.execute('insert into logindata(username,password,name) values (?, ?, ?)', [username, password, name]);
     return res.redirect('/');
 }
+
+let adminPage = async (req, res) => {
+    res.render("G:/Project-2-20222/src/view/adminCreate.ejs")
+}
+let adminData = async (req, res) => {
+    console.log("check:", req.body)
+    let { content, detail, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5 } = req.body;
+    await pool.execute('insert into exercise(content, detail, input1,output1,input2,output2,input3,output3,input4,output4,input5,output5) values (?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?, ?)', [content, detail, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5]);
+    return res.redirect('/admin');
+}
 export default {
     createdata, savedata, logindata, getExercise, getDetailExercise,
-    compilerMachine, compilePage, loginDataCheck, reset, signupPage, signupData
+    compilerMachine, compilePage, loginDataCheck, reset, signupPage, signupData, adminPage, adminData
 };

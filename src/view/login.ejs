@@ -50,7 +50,7 @@
                 username: username.value,
                 password: password.value
             }
-            console.log(login);
+            console.log("login:", login);
             var oLogin = await fetch("http://localhost:8000/login", {
                 method: "POST",
                 headers: {
@@ -61,14 +61,19 @@
                 .then(async (response) => response.json())
                 .then(async (data) => {
                     console.log(data);
-                    if (data.status == "success") {
+                    if (data.status == "admin") {
+                        window.location.href = "http://localhost:8000/admin"
+                    }
+                    else if (data.status == "success") {
                         window.location.href = "http://localhost:8000/exercise";
                     } else {
                         alert("Đăng nhập thất bại");
                         window.location.href = "http://localhost:8000";
                     }
                 });
-        })
+        }
+        )
+
     </script>
 
 </body>
