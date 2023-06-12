@@ -14,20 +14,23 @@
 <body>
     <div class="container">
         <h1 class="h1-container">Đăng kí tài khoản</h1>
-        <form action="">
+        <form action="/signup-user" method="POST">
             <div class="form-outline">
                 <label class="form-label" for="typeText">Tên người dùng:</label>
-                <input type="text" id="typeText" class="form-control-lg form-control" placeholder="Tên người dùng" />
+                <input type="text" id="typeText" class="form-control-lg form-control" placeholder="Tên người dùng"
+                    name="name" />
             </div>
 
             <div class="form-outline">
                 <label class="form-label" for="typeText1">Username:</label><br>
-                <input type="text" id="typeText1" class="form-control-lg form-control" placeholder="Username" />
+                <input type="text" id="typeText1" class="form-control-lg form-control" placeholder="Username"
+                    name="username" />
             </div>
 
             <div class="form-outline">
                 <label class="form-label" for="typePassword">Mật khẩu:</label>
-                <input type="password" id="typePassword" class="form-control-lg form-control" placeholder="Mật khẩu" />
+                <input type="password" id="typePassword" class="form-control-lg form-control" placeholder="Mật khẩu"
+                    name="password" />
             </div>
 
             <div class="form-outline">
@@ -40,6 +43,8 @@
                     khoản</button>
             </div>
         </form>
+        <div style="padding-left: 55px;">Nếu bạn đã có tài khoản.Trở về để <a href="/">Trang chủ</a> đăng nhập
+        </div>
     </div>
 </body>
 

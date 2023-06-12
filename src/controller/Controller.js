@@ -166,7 +166,14 @@ let reset = async (req, res) => {
 let signupPage = async (req, res) => {
     return res.render('signup.ejs');
 }
+
+let signupData = async (req, res) => {
+    console.log("check:", req.body)
+    let { name, username, password } = req.body;
+    await pool.execute('insert into logindata(username,password,name) values (?, ?, ?)', [username, password, name]);
+    return res.redirect('/');
+}
 export default {
     createdata, savedata, logindata, getExercise, getDetailExercise,
-    compilerMachine, compilePage, loginDataCheck, reset, signupPage
+    compilerMachine, compilePage, loginDataCheck, reset, signupPage, signupData
 };
