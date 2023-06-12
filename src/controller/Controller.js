@@ -162,7 +162,11 @@ let reset = async (req, res) => {
         res.render("G:/Project-2-20222/src/view/login.ejs")
     }
 }
+
+let signupPage = async (req, res) => {
+    return res.render('signup.ejs');
+}
 export default {
     createdata, savedata, logindata, getExercise, getDetailExercise,
-    compilerMachine, compilePage, loginDataCheck, reset
+    compilerMachine, compilePage, loginDataCheck, reset, signupPage
 };

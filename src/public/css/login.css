@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,400;0,500;0,600;0,700;1,500;1,700&display=swap');
+
+* {
+    font-family: 'Roboto Mono', monospace;
+}
+
 body {
     background: url("../img/pic.jpg") no-repeat;
     background-size: cover;
@@ -22,7 +28,8 @@ body {
 
 .login-container button {
 
-    margin-top: 150px;
+    margin-top: 60px;
+    margin-bottom: 20px;
 }
 
 .login-container label {
@@ -37,4 +44,12 @@ img {
     width: 800px;
     height: 800px;
     margin-bottom: 20px;
+}
+
+.form-control {
+    margin-bottom: 20px;
+}
+
+.h2-container {
+    margin-bottom: 40px;
 }

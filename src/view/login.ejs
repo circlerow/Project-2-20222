@@ -16,22 +16,27 @@
 <body>
     <div class="container1">
         <div class="login-container">
-            <h2>Đăng nhập</h2>
+            <h2 class="h2-container">Đăng nhập</h2>
             <form action="/login" method="">
-                <label for="">Tên Đăng Nhập</label>
-                <div class="input-group input-group-lg">
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-lg" id="username">
-                </div>
-
-                <label for="">Mật khẩu</label>
-                <div class="input-group input-group-lg">
-                    <input type="password" class="form-control" placeholder="Password" aria-label="Password"
-                        aria-describedby="basic-addon1" id="password">
-                </div>
-
                 <div>
-                    <button type="submit" class="btn btn-success center container" id="login">Đăng Nhập</button>
+                    <label for="">Tên Đăng Nhập</label>
+                    <div class="input-group input-group-lg">
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-lg" id="username">
+                    </div>
+                </div>
+                <div style="margin-top: 30px;">
+                    <label for="">Mật khẩu</label>
+                    <div class="input-group input-group-lg">
+                        <input type="password" class="form-control" placeholder="Password" aria-label="Password"
+                            aria-describedby="basic-addon1" id="password">
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-success container" id="login">Đăng Nhập</button>
+                </div>
+                <div class="text-center">
+                    <a href="/signup">Đăng kí tài khoản</a>
                 </div>
             </form>
         </div>

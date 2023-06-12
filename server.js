@@ -14,6 +14,7 @@ app.use("/codemirror-5.65.12", express.static("G:/Project-2-20222/codemirror-5.6
 app.get("/", controller.reset)
 app.get("/exercise", controller.getExercise)
 app.get("/detail/exercise/:id", controller.getDetailExercise)
+app.get("/signup", controller.signupPage)
 app.post("/login", controller.loginDataCheck)
 app.get("/index", controller.compilePage)
 app.post("/compile", controller.compilerMachine)
