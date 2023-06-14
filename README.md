@@ -146,3 +146,7 @@ Luồng thứ 2 là output,lấy từ dữ liệu sau khi biên dịch<br>
 
 #### Tạo trang đăng nhập
 Tạo giao diện đăng nhập,2 trường nhập là username và password<br>
+Phân luồng đăng nhập khác nhau giữa admin và user<br>
+Phân chia chứa năng của admin là thêm dữ liệu bài tập (soon:xem danh sách user)<br>
+Chức năng người dùng là xem danh sách bài tập và nộp bài tập<br>
+Sẽ hiện kết quả của từng bài tập và có trình biên dịch hỗ trợ
