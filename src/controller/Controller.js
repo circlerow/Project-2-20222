@@ -39,7 +39,6 @@ let getDetailExercise = async (req, res) => {
 
 let updateExercise = async (req, res) => {
     let exerciseId = req.params.id;
-    console.log(exerciseId);
     let exercise = await pool.execute(`select * from exercise where Id = ?`, [exerciseId]);
     let info = JSON.stringify(exercise[0]);
     const obj = JSON.parse(info)
