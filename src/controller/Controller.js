@@ -36,6 +36,23 @@ let getDetailExercise = async (req, res) => {
     return res.render('exerciseDetail.ejs', { info: obj });
 }
 
+
+let updateExercise = async (req, res) => {
+    let exerciseId = req.params.id;
+    console.log(exerciseId);
+    let exercise = await pool.execute(`select * from exercise where Id = ?`, [exerciseId]);
+    let info = JSON.stringify(exercise[0]);
+    const obj = JSON.parse(info)
+    return res.render('updateExercise.ejs', { info: obj });
+}
+
+let updateExerciseData = async (req, res) => {
+    let { Id, content, detail, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5 } = req.body;
+    console.log(Id, content, detail, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5);
+    await pool.execute('update exercise set content = ?, detail = ?, input1 = ?, output1 = ?, input2 = ?, output2 = ?, input3 = ?, output3 = ?, input4 = ?, output4 = ?, input5 = ?, output5 = ? where Id = ?', [content, detail, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5, Id]);
+    return res.redirect('/admin-exercise');
+}
+
 let userPage = async (req, res) => {
     const [rows, fields] = await pool.execute('SELECT * FROM logindata');
     res.render("G:/Project-2-20222/src/view/user.ejs", { user: rows })
@@ -196,10 +213,15 @@ let adminData = async (req, res) => {
 let adminLogin = async (req, res) => {
     res.render("G:/Project-2-20222/src/view/admin.ejs")
 }
+let adminExercise = async (req, res) => {
+    const [rows, fields] = await pool.execute('select * from exercise');
+    res.render("G:/Project-2-20222/src/view/exerciseAdmin.ejs", { dataExercise: rows })
+}
 
 
 export default {
     createdata, savedata, logindata, getExercise, getDetailExercise,
     compilerMachine, compilePage, loginDataCheck, reset, signupPage,
-    signupData, adminPage, adminData, userPage, adminLogin
+    signupData, adminPage, adminData, userPage, adminLogin, adminExercise,
+    updateExercise, updateExerciseData
 };

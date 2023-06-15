@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Sửa bài tập</h1>
+    <form action="/update-exercise" method="POST">
+        <div>
+            <label for="">Tiêu đề</label>
+            <input type="text" name="content" id="" value="<%=info[0].content%>">
+        </div>
+        <div>
+            <label for="">Nội dung</label>
+            <textarea name="detail" id="" cols="30" rows="10"><%=info[0].detail%></textarea>
+        </div>
+        <div>
+            <label for="">Input1</label>
+            <input type="text" name="input1" id="" value="<%=info[0].input1%>">
+        </div>
+        <div>
+            <label for="">Output1</label>
+            <input type="text" name="output1" id="" value="<%=info[0].output1%>">
+        </div>
+        <div>
+            <label for="">Input2</label>
+            <input type="text" name="input2" id="" value="<%=info[0].input2%>">
+        </div>
+        <div>
+            <label for="">Output2</label>
+            <input type="text" name="output2" id="" value="<%=info[0].output2%>">
+        </div>
+        <div>
+            <label for="">Input3</label>
+            <input type="text" name="input3" id="" value="<%=info[0].input3%>">
+        </div>
+        <div>
+            <label for="">Output3</label>
+            <input type="text" name="output3" id="" value="<%=info[0].output3%>">
+        </div>
+        <div>
+            <label for="">Input4</label>
+            <input type="text" name="input4" id="" value="<%=info[0].input4%>">
+        </div>
+        <div>
+            <label for="">Output4</label>
+            <input type="text" name="output4" id="" value="<%=info[0].output4%>">
+        </div>
+        <div>
+            <label for="">Input5</label>
+            <input type="text" name="input5" id="" value="<%=info[0].input5%>">
+        </div>
+        <div>
+            <label for="">Output5</label>
+            <input type="text" name="output5" id="" value="<%=info[0].output5%>">
+        </div>
+        <input type="text" value="<%= info[0].Id %>" hidden name="Id">
+        <div>
+            <button type="submit" class="btn-save">Cập nhật</button>
+        </div>
+    </form>
+</body>
+
+</html>
