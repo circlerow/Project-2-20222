@@ -5,64 +5,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../css/update.css">
 </head>
 
 <body>
-    <h1>Sửa bài tập</h1>
-    <form action="/update-exercise" method="POST">
-        <div>
-            <label for="">Tiêu đề</label>
-            <input type="text" name="content" id="" value="<%=info[0].content%>">
-        </div>
-        <div>
-            <label for="">Nội dung</label>
-            <textarea name="detail" id="" cols="30" rows="10"><%=info[0].detail%></textarea>
-        </div>
-        <div>
-            <label for="">Input1</label>
-            <input type="text" name="input1" id="" value="<%=info[0].input1%>">
-        </div>
-        <div>
-            <label for="">Output1</label>
-            <input type="text" name="output1" id="" value="<%=info[0].output1%>">
-        </div>
-        <div>
-            <label for="">Input2</label>
-            <input type="text" name="input2" id="" value="<%=info[0].input2%>">
-        </div>
-        <div>
-            <label for="">Output2</label>
-            <input type="text" name="output2" id="" value="<%=info[0].output2%>">
-        </div>
-        <div>
-            <label for="">Input3</label>
-            <input type="text" name="input3" id="" value="<%=info[0].input3%>">
-        </div>
-        <div>
-            <label for="">Output3</label>
-            <input type="text" name="output3" id="" value="<%=info[0].output3%>">
-        </div>
-        <div>
-            <label for="">Input4</label>
-            <input type="text" name="input4" id="" value="<%=info[0].input4%>">
-        </div>
-        <div>
-            <label for="">Output4</label>
-            <input type="text" name="output4" id="" value="<%=info[0].output4%>">
-        </div>
-        <div>
-            <label for="">Input5</label>
-            <input type="text" name="input5" id="" value="<%=info[0].input5%>">
-        </div>
-        <div>
-            <label for="">Output5</label>
-            <input type="text" name="output5" id="" value="<%=info[0].output5%>">
-        </div>
-        <input type="text" value="<%= info[0].Id %>" hidden name="Id">
-        <div>
-            <button type="submit" class="btn-save">Cập nhật</button>
-        </div>
-    </form>
+    <div class="container">
+        <h1>Sửa bài tập</h1>
+        <form action="/update-exercise" method="POST">
+            <div class="form-group">
+                <span for="" class="form-label">Tiêu đề</span>
+                <input type="text" name="content" id="" value="<%=info[0].content%>" class="form-control">
+            </div>
+            <div class="form-group">
+                <span for="" class="form-label margin">Nội dung</span>
+                <textarea name="detail" id="" cols="30" rows="10"
+                    class="form-control margin"><%=info[0].detail%></textarea>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span for="">Input1</span><br>
+                        <input type="text" name="input1" id="" value="<%=info[0].input1%>" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span for="">Output1</span>
+                        <input type="text" name="output1" id="" value="<%=info[0].output1%>" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span for="">Input2</span><br>
+                        <input type="text" name="input2" id="" value="<%=info[0].input2%>" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span for="">Output2</span>
+                        <input type="text" name="output2" id="" value="<%=info[0].output2%>" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span for="">Input3</span><br>
+                        <input type="text" name="input3" id="" value="<%=info[0].input3%>" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span for="">Output3</span>
+                        <input type="text" name="output3" id="" value="<%=info[0].output3%>" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span for="">Input4</span><br>
+                        <input type="text" name="input4" id="" value="<%=info[0].input4%>" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span for="">Output4</span>
+                        <input type="text" name="output4" id="" value="<%=info[0].output4%>" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span for="">Input5</span><br>
+                        <input type="text" name="input5" id="" value="<%=info[0].input5%>" class="form-control">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <span for="">Output5</span>
+                        <input type="text" name="output5" id="" value="<%=info[0].output5%>" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <input type="text" value="<%= info[0].Id %>" hidden name="Id">
+            <div>
+                <button type="submit" class="btn btn-success">Cập nhật</button>
+            </div>
+        </form>
+    </div>
 </body>
 
 </html>
