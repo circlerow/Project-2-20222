@@ -36,6 +36,11 @@ let getDetailExercise = async (req, res) => {
     return res.render('exerciseDetail.ejs', { info: obj });
 }
 
+let userPage = async (req, res) => {
+    const [rows, fields] = await pool.execute('SELECT * FROM logindata');
+    res.render("G:/Project-2-20222/src/view/user.ejs", { user: rows })
+}
+
 let compilerMachine = async (req, res) => {
     var code = req.body.code //lấy code từ form
     var input = req.body.input //lấy input từ form
@@ -188,7 +193,11 @@ let adminData = async (req, res) => {
     await pool.execute('insert into exercise(content, detail, input1,output1,input2,output2,input3,output3,input4,output4,input5,output5) values (?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?, ?)', [content, detail, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5]);
     return res.redirect('/admin');
 }
+
+
+
 export default {
     createdata, savedata, logindata, getExercise, getDetailExercise,
-    compilerMachine, compilePage, loginDataCheck, reset, signupPage, signupData, adminPage, adminData
+    compilerMachine, compilePage, loginDataCheck, reset, signupPage,
+    signupData, adminPage, adminData, userPage
 };

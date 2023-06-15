@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(247, 198, 240) !important;
     background-size: cover;
 }
 
@@ -10,6 +10,12 @@ table {
 
 }
 
+h2 {
+    text-align: center;
+    margin-top: 15px !important;
+    margin-bottom: 15px !important;
+}
+
 
 .w3-container {
     display: flex;
@@ -17,6 +23,13 @@ table {
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.short-width {
+    width: 70%;
+    text-align: center;
+    display: flex;
+    margin: auto;
 }
 
 .w3-table-all {

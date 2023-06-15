@@ -22,6 +22,7 @@ app.post("/signup-user", controller.signupData)
 app.post("/login", controller.loginDataCheck)
 app.get("/index", controller.compilePage)
 app.post("/compile", controller.compilerMachine)
+app.get("/user", controller.userPage)
 
 
 app.listen(8000)

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/exercise.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="w3-container short-width">
+        <h2>Danh sách sinh viên</h2>
+        <table class=" table table-striped-columns">
+            <thead class="table-primary">
+                <tr class="">
+                    <th>Id</th>
+                    <th>Tên tài khoản</th>
+                    <th>Mật khẩu</th>
+                    <th>Tên sinh viên</th>
+                </tr>
+            </thead>
+            <tbody class="table-warning">
+                <% for(let i=0; i < user.length; i++) { %>
+                    <tr>
+                        <td>
+                            <%= user[i].Id %>
+                        </td>
+                        <td>
+                            <%= user[i].username %>
+                        </td>
+                        <td>
+                            <%= user[i].password %>
+                        </td>
+                        <td>
+                            <%= user[i].name %>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+
+
+        </table>
+    </div>
+
+
+</body>
+
+</html>
