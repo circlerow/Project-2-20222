@@ -4,6 +4,7 @@ import bodyP from 'body-parser';
 import compiler from 'compilex';
 const option = { stats: true } //option dùng để lưu trữ các thông tin về code
 import controller from "./src/controller/Controller.js";
+import apiController from './src/controller/apiController.js';
 import configViewEngine from './src/config/viewEngine.js'
 
 compiler.init(option) //compiler.init dùng để khởi tạo compiler
@@ -27,6 +28,12 @@ app.post("/login", controller.loginDataCheck)
 app.get("/index", controller.compilePage)
 app.post("/compile", controller.compilerMachine)
 app.get("/user", controller.userPage)
+
+
+//API
+app.get("/user-api", apiController.getAllUser)
+app.get("/exercise-api", apiController.getAllExercise)
+app.get("/exercise-api/:id", apiController.getExercise)
 
 
 app.listen(8000)
