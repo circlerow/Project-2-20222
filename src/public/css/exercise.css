@@ -1,13 +1,15 @@
 body {
     background-color: rgb(247, 198, 240) !important;
     background-size: cover;
+
+
 }
 
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
-
+    vertical-align: middle !important;
 }
 
 h2 {
@@ -40,4 +42,21 @@ h2 {
 a {
     text-decoration: none;
     color: black;
+}
+
+.green {
+    background-color: rgb(71, 183, 108) !important;
+    vertical-align: middle;
+}
+
+.yellow {
+    background-color: yellow !important;
+
+    vertical-align: middle;
+}
+
+.red {
+    background-color: #ff2240 !important;
+
+    vertical-align: middle;
 }

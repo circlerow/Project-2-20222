@@ -19,6 +19,7 @@
                 <tr class="">
                     <th>Bài tập </th>
                     <th>Tên bài</th>
+                    <th>Độ khó</th>
                     <th>Giải bài tập</th>
                 </tr>
             </thead>
@@ -31,11 +32,24 @@
                         <td>
                             <%= dataExercise[i].content %>
                         </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-primary"><a
-                                    href="/detail/exercise/<%= dataExercise[i].Id%>">Giải
-                                    bài tập số <%= dataExercise[i].Id%></a></button>
-                        </td>
+                        <% if(dataExercise[i].level=='Easy' ){ %>
+                            <td class="green">
+                                <%= dataExercise[i].level %>
+                            </td>
+                            <% } else if(dataExercise[i].level=='Medium' ){ %>
+                                <td class="yellow">
+                                    <%= dataExercise[i].level %>
+                                </td>
+                                <% } else if(dataExercise[i].level=='Hard' ){ %>
+                                    <td class="red">
+                                        <%= dataExercise[i].level %>
+                                    </td>
+                                    <% } %>
+                                        <td>
+                                            <button type="button" class="btn btn-outline-primary"><a
+                                                    href="/detail/exercise/<%= dataExercise[i].Id%>">Giải
+                                                    bài tập số <%= dataExercise[i].Id%></a></button>
+                                        </td>
                     </tr>
                     <% } %>
             </tbody>
