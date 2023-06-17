@@ -50,16 +50,16 @@ Sẽ hiện kết quả của từng bài tập và có trình biên dịch hỗ
 
 ## Demo chương trình
 ### Login,Singup
-![image](demo\login.png)<br>
-![image](demo\signup.png)<br>
+![image](demo/login.png)<br>
+![image](demo/signup.png)<br>
 ### Admin
-![image](demo\admin.png)<br>
-![image](demo\update-exercise.png)<br>
-![image](demo\list-user.png)<br>
-![image](demo\update-exsercise-detail.png)<br>
-![image](demo\create-exercise.png)<br>
+![image](demo/admin.png)<br>
+![image](demo/update-exercise.png)<br>
+![image](demo/list-user.png)<br>
+![image](demo/update-exsercise-detail.png)<br>
+![image](demo/create-exercise.png)<br>
 ### User
-![image](demo\compiler.png)<br>
-![image](demo\list-exercise.png)<br>
-![image](demo\mark-exercise.png)<br>
-![image](demo\solve-exercise.png)<br>
+![image](demo/compiler.png)<br>
+![image](demo/list-exercise.png)<br>
+![image](demo/mark-exercise.png)<br>
+![image](demo/solve-exercise.png)<br>
