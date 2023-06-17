@@ -16,13 +16,6 @@ let savedata = async (data) => {
     return;
 };
 
-let logindata = async (username, password) => {
-    console.log("check INPUT:", username, password);
-    const [row] = await pool.execute('select * from logindata where username = ? and password = ?', [username, password]);
-    console.log("check:", row.length)
-    return row.length;
-}
-
 let getExercise = async (req, res) => {
     const [rows, fields] = await pool.execute('SELECT * FROM exercise');
     return res.render('exercise.ejs', { dataExercise: rows });
@@ -34,23 +27,6 @@ let getDetailExercise = async (req, res) => {
     let info = JSON.stringify(exercise[0]);
     const obj = JSON.parse(info)
     return res.render('exerciseDetail.ejs', { info: obj });
-}
-
-
-let updateExercise = async (req, res) => {
-    let exerciseId = req.params.id;
-    let exercise = await pool.execute(`select * from exercise where Id = ?`, [exerciseId]);
-    let info = JSON.stringify(exercise[0]);
-    const obj = JSON.parse(info)
-    return res.render('updateExercise.ejs', { info: obj });
-}
-
-let updateExerciseData = async (req, res) => {
-    let { Id, content, detail, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5 } = req.body;
-    console.log(Id, content, detail, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5);
-    await pool.execute('update exercise set content = ?, detail = ?,level=?, input1 = ?, output1 = ?, input2 = ?, output2 = ?, input3 = ?, output3 = ?, input4 = ?, output4 = ?, input5 = ?, output5 = ? where Id = ?',
-        [content, detail, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5, Id]);
-    return res.redirect('/admin-exercise');
 }
 
 let userPage = async (req, res) => {
@@ -165,64 +141,8 @@ let compilerMachine = async (req, res) => {
 let compilePage = (req, res) => {
     res.render("G:/Project-2-20222/src/view/index.ejs")
 }
-let loginDataCheck = async (req, res) => {
-    console.log("check:", req.body)
-    const rowCount = await logindata(req.body.username, req.body.password)
-    console.log("checkrow:", rowCount)
-    console.log("check:", req.body.username, req.body.password)
-    let { username, password } = req.body;
-    if (username == "admin" && password == "1") {
-        res.send({ status: "admin" })
-    }
-    else if (rowCount > 0) {
-        res.send({ status: "success" })
-    }
-    else {
-        res.send({ status: "fail" })
-    }
-}
-let reset = async (req, res) => {
-    {
-        compiler.flush(function () {
-            console.log("deleted")
-        })
-        res.render("G:/Project-2-20222/src/view/login.ejs")
-    }
-}
-
-let signupPage = async (req, res) => {
-    return res.render('signup.ejs');
-}
-
-let signupData = async (req, res) => {
-    console.log("check:", req.body)
-    let { name, username, password } = req.body;
-    await pool.execute('insert into logindata(username,password,name) values (?, ?, ?)', [username, password, name]);
-    return res.redirect('/');
-}
-
-let adminPage = async (req, res) => {
-    res.render("G:/Project-2-20222/src/view/adminCreate.ejs")
-}
-let adminData = async (req, res) => {
-    console.log("check:", req.body)
-    let { content, detail, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5 } = req.body;
-    await pool.execute('insert into exercise(content, detail,level, input1,output1,input2,output2,input3,output3,input4,output4,input5,output5) values (?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?, ?)',
-        [content, detail, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5]);
-    return res.redirect('/admin');
-}
-let adminLogin = async (req, res) => {
-    res.render("G:/Project-2-20222/src/view/admin.ejs")
-}
-let adminExercise = async (req, res) => {
-    const [rows, fields] = await pool.execute('select * from exercise');
-    res.render("G:/Project-2-20222/src/view/exerciseAdmin.ejs", { dataExercise: rows })
-}
 
 
 export default {
-    createdata, savedata, logindata, getExercise, getDetailExercise,
-    compilerMachine, compilePage, loginDataCheck, reset, signupPage,
-    signupData, adminPage, adminData, userPage, adminLogin, adminExercise,
-    updateExercise, updateExerciseData
+    getExercise, getDetailExercise, compilerMachine, compilePage, userPage,
 };
