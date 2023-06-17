@@ -19,111 +19,7 @@ app.get("/",function (req,res){ //app.get dùng để lấy dữ liệu từ for
     res.sendFile("G:/Web Project/Simple-Compiler/index.html")//res.sendFile dùng để gửi file index.html
 })
 ```
-### Xây dựng hàng đợi 
-Xây dựng hàng đợi để xác định thứ tự các lần compile tránh trường hợp nhiều người cùng compile cùng lúc.<br>
-Xây dựng hàng đợi bằng thư viện Node Bull dựa trên nền tảng Redis<br>
-[Thư viện Bull](https://optimalbits.github.io/bull/)<br>
-### Tạo 1 hàng đợi mới<br>
-`const myFirstQueue = new Bull('my-first-queue');`<br>
-Một hàng đợi thường có 3 vai trò khác nhau : 1 nhà sản xuất công việc,1 người làm việc hoặc/và 1 bộ lắng nghe sự kiện<br>
-Producer có thể thêm nhiều công việc vào hàng đợi ngay cả khi không có consumer tại thời điểm đó:Hàng đợi cung cấp giao tiếp không đồng bộ<br>
-#### Producers<br>
-Có thể thêm công việc vào hàng đợi :<br>
-```
-const myFirstQueue = new Bull('my-first-queue');
 
-const job = await myFirstQueue.add({
-  foo: 'bar'
-});
-```
-<br>
-Công việc là 1 javascript object và có thể có bất kỳ thuộc tính nào bạn muốn.Oject này cần phải tuần tự hóa, cụ thể hơn là 1 chuỗi JSON,chính là cách lưu trữ trên Redis <br>
-
-#### Consumers<br>
-Là một chương trình Node định nghĩa 1 hàm tiến trình để xử lí công việc<br>
-
-```
-const myFirstQueue = new Bull('my-first-queue');
-
-myFirstQueue.process(async (job) => {
-  return doSomething(job.data);
-});
-```
-<br>
-Tiến trình sẽ luôn được gọi mỗi khi consumer rảnh rỗi và có công việc cần xử lý trong hàng đợi.
-Comsumers sẽ không thường xuyên trực tuyến nên có thể có nhiều công việc đang chờ trong hàng đợi,quy trinhg sẽ thực hiện từng công việc 1 cho đến khi hàng đợi rỗng<br>
-Giá trị trả về được lưu trữ trong job object và có thể được truy cập sau này<br>
-Đôi khi có thể cung cấp tiến độ công việc bên ngoài tiến trình bằng cách gọi job.progress() trong tiến trình<br>
-
-```
-myFirstQueue.process( async (job) => {
-  let progress = 0;
-  for(i = 0; i < 100; i++){
-    await doSomething(job.data);
-    progress += 10;
-    job.progress(progress);
-  }
-});
-``` 
-<br>
-
-#### Listeners<br>
-Listener có thể lắng nghe cục bộ hoặc toàn cục<br>
-Có thể đính kèm 1 trình lắng nghe sự kiện cho 1 hàng đợi<br>
-```
-const myFirstQueue = new Bull('my-first-queue');
-
-// Define a local completed event
-myFirstQueue.on('completed', (job, result) => {
-  console.log(`Job completed with result ${result}`);
-})
-```
-#### Job Lifecycle<br>
-<br>
-
-![Hình ảnh minh họa](./job-lifecycle.jpeg)<br>
-### Events<br>
-Sự kiện hoàn thành cục bộ<br>
-```
-queue.on('completed', job => {
-  console.log(`Job with id ${job.id} has been completed`);
-})
-```
-Sự kiện hoàn thành toàn cục<br>
-```
-queue.on('global:completed', jobId => {
-  console.log(`Job with id ${jobId} has been completed`);
-})
-```
-Các sự kiện khác:<br>
-[Tài liệu tham khảo](https://github.com/OptimalBits/bull/blob/master/REFERENCE.md#eventsk)
-### Queue Options<br>
-#### Rate Limiter<br>
-Có thể đặt cho hàng đợi số lượng công việc xử lý trên 1 đơn vị thời gian<br>
-```
-// Limit queue to max 1.000 jobs per 5 seconds.
-const myRateLimitedQueue = new Queue('rateLimited', {
-  limiter: {
-    max: 1000,
-    duration: 5000
-  }
-})
-```
-Khi đạt đến giới hạn công việc request sẽ tham gia hàng đợi delay<br>
-#### Named Jobs<br>
-Có thể đặt tên cho các công việc trong hàng đợi giúp hàng đợi rõ ràng trực quan hơn<br>
-```
-// Jobs producer
-const myJob = await transcoderQueue.add('image', { input: 'myimagefile' });
-const myJob = await transcoderQueue.add('audio', { input: 'myaudiofile' });
-const myJob = await transcoderQueue.add('video', { input: 'myvideofile' });
-```
-```
-// Worker
-transcoderQueue.process('image', processImage);
-transcoderQueue.process('audio', processAudio);
-transcoderQueue.process('video', processVideo);
-```
 ## Tìm hiểu về Redis<br>
 ### Cài đặt Redis
 Cài đặt redis từ [trang chủ](https://github.com/MicrosoftArchive/redis/releases).
@@ -150,3 +46,20 @@ Phân luồng đăng nhập khác nhau giữa admin và user<br>
 Phân chia chứa năng của admin là thêm dữ liệu bài tập (soon:xem danh sách user)<br>
 Chức năng người dùng là xem danh sách bài tập và nộp bài tập<br>
 Sẽ hiện kết quả của từng bài tập và có trình biên dịch hỗ trợ
+
+
+## Demo chương trình
+### Login,Singup
+![image](G:\Project-2-20222\demo\login.png)
+![image](G:\Project-2-20222\demo\singup.png)
+### Admin
+![image](G:\Project-2-20222\demo\admin.png)
+![image](G:\Project-2-20222\demo\update-exercise.png)
+![image](G:\Project-2-20222\demo\list-user.png)
+![image](G:\Project-2-20222\demo\update-exsercise-detail.png)
+![image](G:\Project-2-20222\demo\create-exercise.png)
+### User
+![image](G:\Project-2-20222\demo\compiler.png)
+![image](G:\Project-2-20222\demo\list-exercise.png)
+![image](G:\Project-2-20222\demo\mark-exercise.png)
+![image](G:\Project-2-20222\demo\solve-exercise.png)
