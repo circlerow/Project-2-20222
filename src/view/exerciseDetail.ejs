@@ -77,6 +77,8 @@
         })
 
         run.addEventListener("click", async function () {
+            var currentTime = new Date();
+            console.log(currentTime.getTime());
             var inputArray = [`<%= info[0].input1 %>`, `<%= info[0].input2 %>`, `<%= info[0].input3 %>`, `<%= info[0].input4 %>`, `<%= info[0].input5 %>`];
             var outputArray = [`<%= info[0].output1 %>`, `<%= info[0].output2 %>`, `<%= info[0].output3 %>`, `<%= info[0].output4 %>`, `<%= info[0].output5 %>`];
             for (let index = 1; index <= 5; index++) {
@@ -102,16 +104,29 @@
                     body: JSON.stringify(code)
                 });
                 var d = await oData.json();
+                var nowTime = new Date();
+                console.log(nowTime.getTime());
+                console.log(nowTime.getTime() - currentTime.getTime());
                 var output_value = d.output;
-                if (output_value == output) {
-                    document.getElementById("output" + index).innerHTML = "Test case" + index + ": Đúng  ";
+                console.log(output_value);
+
+
+                if (nowTime.getTime() - currentTime.getTime() > 2000) {
+                    document.getElementById("output" + index).innerHTML = "Test case" + index + ":Time limit exceeded";
+                    const checkIcon = document.createElement("i");
+                    checkIcon.classList.add("fa-regular", "fa-circle-question");
+                    document.getElementById("output" + index).appendChild(checkIcon);
+                    document.getElementById("output" + index).style.color = "yellow";
+                }
+                else if (output_value == output) {
+                    document.getElementById("output" + index).innerHTML = "Test case" + index + ": Accepted  ";
                     const checkIcon = document.createElement("i");
                     checkIcon.classList.add("fa-regular", "fa-circle-check");
                     document.getElementById("output" + index).appendChild(checkIcon);
                     document.getElementById("output" + index).style.color = "green";
                 }
                 else {
-                    document.getElementById("output" + index).innerHTML = "Test case" + index + ": Sai  ";
+                    document.getElementById("output" + index).innerHTML = "Test case" + index + ": Wrong Answer  ";
                     const checkIcon = document.createElement("i");
                     checkIcon.classList.add("fa-regular", "fa-circle-xmark");
                     document.getElementById("output" + index).appendChild(checkIcon);
