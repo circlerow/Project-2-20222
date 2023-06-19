@@ -8,10 +8,10 @@ let updateExercise = async (req, res) => {
     return res.render('updateExercise.ejs', { info: obj });
 }
 let updateExerciseData = async (req, res) => {
-    let { Id, content, detail, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5 } = req.body;
-    console.log(Id, content, detail, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5);
-    await pool.execute('update exercise set content = ?, detail = ?,level=?, input1 = ?, output1 = ?, input2 = ?, output2 = ?, input3 = ?, output3 = ?, input4 = ?, output4 = ?, input5 = ?, output5 = ? where Id = ?',
-        [content, detail, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5, Id]);
+    let { Id, content, detail, time, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5 } = req.body;
+    console.log(Id, content, detail, time, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5);
+    await pool.execute('update exercise set content = ?, detail = ?,time=?,level=?, input1 = ?, output1 = ?, input2 = ?, output2 = ?, input3 = ?, output3 = ?, input4 = ?, output4 = ?, input5 = ?, output5 = ? where Id = ?',
+        [content, detail, time, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5, Id]);
     return res.redirect('/admin-exercise');
 }
 let adminPage = async (req, res) => {
@@ -19,9 +19,9 @@ let adminPage = async (req, res) => {
 }
 let adminData = async (req, res) => {
     console.log("check:", req.body)
-    let { content, detail, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5 } = req.body;
-    await pool.execute('insert into exercise(content, detail,level, input1,output1,input2,output2,input3,output3,input4,output4,input5,output5) values (?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?, ?)',
-        [content, detail, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5]);
+    let { content, detail, time, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5 } = req.body;
+    await pool.execute('insert into exercise(content, detail,time,level, input1,output1,input2,output2,input3,output3,input4,output4,input5,output5) values (?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?, ?)',
+        [content, detail, time, level, input1, output1, input2, output2, input3, output3, input4, output4, input5, output5]);
     return res.redirect('/admin');
 }
 

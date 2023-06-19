@@ -24,6 +24,10 @@
                     class="form-control margin"><%=info[0].detail%></textarea>
             </div>
             <div class="form-group">
+                <span for="" class="form-label">Thời gian</span>
+                <input type="text" name="time" id="" value="<%=info[0].time%>" class="form-control">
+            </div>
+            <div class="form-group">
                 <span for="" class="form-label">Độ khó</span>
                 <select name="level" id="" class="form-control">
                     <option value="Easy" <% if(info[0].level=='Easy' ){ %> selected <% } %> >Easy</option>

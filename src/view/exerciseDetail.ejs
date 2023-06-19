@@ -25,6 +25,9 @@
 
         <h3 class="h3-container">Đề bài: <%= info[0].detail %>
         </h3>
+        <h4 class="h3-container"><b>Thời gian:</b>
+            <%=info[0].time%> ms
+        </h4>
         <p class="p-container">
             Ví dụ Test Case 1:<br>
             <b>Input:</b>
@@ -79,6 +82,7 @@
         run.addEventListener("click", async function () {
             var currentTime = new Date();
             console.log(currentTime.getTime());
+            var time = '<%= info[0].time %>'
             var inputArray = [`<%= info[0].input1 %>`, `<%= info[0].input2 %>`, `<%= info[0].input3 %>`, `<%= info[0].input4 %>`, `<%= info[0].input5 %>`];
             var outputArray = [`<%= info[0].output1 %>`, `<%= info[0].output2 %>`, `<%= info[0].output3 %>`, `<%= info[0].output4 %>`, `<%= info[0].output5 %>`];
             for (let index = 1; index <= 5; index++) {
@@ -111,7 +115,7 @@
                 console.log(output_value);
 
 
-                if (nowTime.getTime() - currentTime.getTime() > 2000) {
+                if (nowTime.getTime() - currentTime.getTime() > time) {
                     document.getElementById("output" + index).innerHTML = "Test case" + index + ":Time limit exceeded";
                     const checkIcon = document.createElement("i");
                     checkIcon.classList.add("fa-regular", "fa-circle-question");
