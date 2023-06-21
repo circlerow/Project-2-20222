@@ -63,3 +63,5 @@ Sẽ hiện kết quả của từng bài tập và có trình biên dịch hỗ
 ![image](demo/list-exercise.png)<br>
 ![image](demo/mark-exercise.png)<br>
 ![image](demo/solve-exercise.png)<br>
+![image](demo/wrong.png)<br>
+![image](demo/timelimit.png)<br>

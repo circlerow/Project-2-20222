@@ -18,6 +18,7 @@ let savedata = async (data) => {
 
 let getExercise = async (req, res) => {
     const [rows, fields] = await pool.execute('SELECT * FROM exercise');
+
     return res.render('exercise.ejs', { dataExercise: rows });
 }
 
