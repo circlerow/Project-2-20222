@@ -35,13 +35,12 @@
                 <b>Output:</b>
                 <%= info[0].output1 %>
         </p>
-
     </div>
     <div class="row">
         <h3 class="h3-container">Nộp Bài Tập</h3>
 
         <div class="col-8" style="padding-left: 40px;">
-            <div class="col-8 w-10 ">
+            <div class="col-12 w-10 ">
                 <div class="col-4 d-inline-block choose-container ">
                     <label class="visually-hidden" for="inlineFormSelectPref">Chọn ngôn ngữ</label>
                     <select class="form-select" id="inlineFormSelectPref">
@@ -51,10 +50,13 @@
                         <option value="python">python</option>
                     </select>
                 </div>
-                <div class="col-5 d-inline-block">
+                <div class="col-6 d-inline-block">
                     <button type="button" class="btn btn-primary"><a href="/index" class="text-light">Chuyển đến trình
                             biên
                             dịch</a></button>
+
+                    <button class="btn btn-success"><a href="/exercise" class="text-light">Danh sách bài
+                            tập</a></button>
                 </div>
             </div>
             <textarea name="answer" id="answer" cols="20" rows="10"
@@ -62,6 +64,8 @@
 
             <button type="submit" id="run" class="btn btn-success btn-container">Nộp bài</button>
         </div>
+
+
         <div class="col-3 output-container">
             <div id="output1" class="output-result"></div>
             <div id="output2" class="output-result"></div>
@@ -142,6 +146,7 @@
 
 
     </script>
+
 </body>
 
 </html>
