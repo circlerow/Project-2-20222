@@ -50,18 +50,31 @@ Sẽ hiện kết quả của từng bài tập và có trình biên dịch hỗ
 
 ## Demo chương trình
 ### Login,Singup
+##### Login
 ![image](demo/login.png)<br>
+##### Signup
 ![image](demo/signup.png)<br>
 ### Admin
+##### Giao diện Admin
 ![image](demo/admin.png)<br>
+##### Sửa đổi bài tập
 ![image](demo/update-exercise.png)<br>
+##### Danh sách sinh viên
 ![image](demo/list-user.png)<br>
+##### Sửa đổi chi tiết bài tập
 ![image](demo/update-exsercise-detail.png)<br>
+##### Thêm bài tập
 ![image](demo/create-exercise.png)<br>
 ### User
+##### Trình biên dịch bài tập
 ![image](demo/compiler.png)<br>
+##### Danh sách bài tập
 ![image](demo/list-exercise.png)<br>
+##### Chấm điểm bài tập đúng
 ![image](demo/mark-exercise.png)<br>
+##### Nộp bài tập
 ![image](demo/solve-exercise.png)<br>
+##### Kết quả bài tập sai
 ![image](demo/wrong.png)<br>
+##### Kết quả bài tập quá thời gian
 ![image](demo/timelimit.png)<br>
