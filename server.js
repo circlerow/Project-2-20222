@@ -51,6 +51,7 @@ app.get("/exercise-api/:id", apiController.getExercise)
 app.post("/logins", apiController.login)
 app.get('/check-login', apiMiddleware.authenticateToken, apiController.checkLogin)
 app.get("/token", apiController.token)
+app.delete("/logout", apiController.logout)
 
 
 

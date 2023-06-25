@@ -63,7 +63,12 @@ let token = async (req, res) => {
     })
 }
 
+let logout = async (req, res) => {
+    refreshTokens = refreshTokens.filter(token => token !== req.body.token)
+    res.sendStatus(204)
+}
+
 export default {
 
-    getAllUser, getAllExercise, getExercise, login, checkLogin, token
+    getAllUser, getAllExercise, getExercise, login, checkLogin, token, logout
 }
