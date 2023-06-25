@@ -1,4 +1,7 @@
 import pool from "../config/connectDB.js";
+import jwt from "jsonwebtoken";
+import dotenv from 'dotenv';
+dotenv.config();
 
 let getAllUser = async (req, res) => {
     const [rows, fields] = await pool.execute('SELECT * FROM logindata');
@@ -26,8 +29,21 @@ let getExercise = async (req, res) => {
     })
 }
 
+let login = async (req, res) => {
+    const username = req.body.username;
+    JSON.stringify(username);
+    console.log("check INPUT:", username);
+    const password = req.body.password;
+    console.log("check INPUT:", username, password);
+    const [row] = await pool.execute('select * from logindata where username = ? and password = ?', [username, password]);
+    if (row.length === 0) return res.status(404).json({ message: "user not found" })
+    const user = { name: username }
+    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+    res.json({ accessToken: accessToken })
+}
+
 
 export default {
 
-    getAllUser, getAllExercise, getExercise
+    getAllUser, getAllExercise, getExercise, login
 }

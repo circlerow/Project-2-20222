@@ -45,6 +45,8 @@ app.post("/signup-user", loginController.signupData)
 app.get("/user-api", apiController.getAllUser)
 app.get("/exercise-api", apiController.getAllExercise)
 app.get("/exercise-api/:id", apiController.getExercise)
+app.post("/logins", apiController.login)
+
 
 
 app.listen(8000)
