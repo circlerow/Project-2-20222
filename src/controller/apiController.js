@@ -42,8 +42,14 @@ let login = async (req, res) => {
     res.json({ accessToken: accessToken })
 }
 
+let checkLogin = async (req, res) => {
+    const [row] = await pool.execute('select * from logindata');
+    console.log("check:", row)
+    res.json(row.filter(post => post.username === req.user.name))
+}
+
 
 export default {
 
-    getAllUser, getAllExercise, getExercise, login
+    getAllUser, getAllExercise, getExercise, login, checkLogin
 }
