@@ -9,7 +9,6 @@ import adminController from './src/controller/adminController.js';
 import apiController from './src/controller/apiController.js';
 import configViewEngine from './src/config/viewEngine.js'
 import apiMiddleware from './src/middleware/apiMiddleware.js';
-import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -51,6 +50,7 @@ app.get("/exercise-api", apiController.getAllExercise)
 app.get("/exercise-api/:id", apiController.getExercise)
 app.post("/logins", apiController.login)
 app.get('/check-login', apiMiddleware.authenticateToken, apiController.checkLogin)
+app.get("/token", apiController.token)
 
 
 
