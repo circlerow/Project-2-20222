@@ -1,6 +1,13 @@
 # Mark Exam Web
 Tiến độ nghiên cứu môn học project 2
 Đây là web phục vụ chấm điểm bài tập lập trình của sinh viên
+## Chạy chương trình
+Chạy chương trình bằng lệnh `npm start`<br>
+Chương trình sẽ chạy trên cổng 8000<br>
+Truy cập vào địa chỉ `localhost:8000` để sử dụng chương trình<br>
+Kết nối với cơ sở dữ liệu MySQL thông qua cổng 3306<br>
+
+
 ## Xây dựng chương trình compiler trên local
 Sử dụng thư viện mã nguồn mở codemirror-5.65.12 để xây dựng chương trình compiler trên local<br>
 [Codemirror](https://codemirror.net/)<br>
