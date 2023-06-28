@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/contest.css">
+    <title>Contest</title>
+
+</head>
+
+<body>
+
+    <div>
+        <h1>Weekly Contest 1</h1>
+    </div>
+    <div class="center">
+        <h2>Mô tả cuộc thi</h2>
+        <p>Đây là bài thi kiểm tra kiến thức môn tin học đại cương</p>
+    </div>
+    <div class="clock-container">
+        <span id="hours"></span>
+        <span id="minutes"></span>
+        <span id="seconds"></span>
+    </div>
+    <div id="score">
+    </div>
+    <div class="exercise">
+        <div id="ex1">
+        </div>
+        <div id="ex2">
+        </div>
+        <div id="ex3">
+        </div>
+        <div id="ex4">
+        </div>
+        <div id="ex5">
+        </div>
+    </div>
+    <div>
+        <button class="btn btn-success center-button" id="start">Bắt đầu</button>
+    </div>
+    <script>
+        var start = document.getElementById("start");
+        var clockInterval;
+        var isCounting = false;
+        var countExercise = '<%=dataExercise.length %>';
+        const countdownDuration = 2 * 60 * 60 * 1000 + 2000;
+        const targetTime = Date.now() + countdownDuration;
+        const score = 0;
+        var numbers = [];
+        while (numbers.length < 5) {
+            var randomNumber = Math.floor(Math.random() * countExercise);
+            if (!numbers.includes(randomNumber)) {
+                numbers.push(randomNumber);
+            }
+        }
+        var dataExercise = []
+        console.log(numbers);
+        var dataE = `<%-dataExercise[${number[1]}].Id-%>`;
+        console.log(dataExercise);
+        start.addEventListener('click', async function () {
+            document.getElementById('score').innerHTML = `<h5>Điểm của bạn: ${score}</h5>`;
+            for (let i = 1; i <= 5; i++) {
+                document.getElementById('ex' + i).innerHTML = `<h3>Bài tập số ${i}</h3>`;
+            }
+            if (!isCounting) {
+                clearInterval(clockInterval);
+                clockInterval = await setInterval(updateClock, 1000);
+                isCounting = true;
+                start.id = 'stop';
+                start.textContent = 'Kết thúc';
+                start.classList.remove('btn-success');
+                start.classList.add('btn-danger');
+            } else {
+                clearInterval(clockInterval);
+                isCounting = false;
+                start.textContent = 'Start';
+                start.classList.remove('btn-danger');
+                start.classList.add('btn-success');
+                start.id = 'start';
+            }
+        });
+
+        function displayCountdown() {
+            const remainingTime = targetTime - Date.now();
+            const seconds = Math.floor((remainingTime / 1000) % 60);
+            const minutes = Math.floor((remainingTime / 1000 / 60) % 60);
+            const hours = Math.floor((remainingTime / (1000 * 60 * 60)) % 24);
+            return {
+                total: remainingTime,
+                hours: hours,
+                minutes: minutes,
+                seconds: seconds
+            };
+        }
+
+        function updateClock() {
+            const remainingTime = targetTime - Date.now();
+            const { hours, minutes, seconds } = displayCountdown();
+            document.getElementById('hours').textContent = hours + ":";
+            document.getElementById('minutes').textContent = minutes + ":";
+            document.getElementById('seconds').textContent = seconds;
+
+            if (remainingTime <= 0) {
+                clearInterval(clockInterval);
+                document.getElementById('hours').textContent = '0';
+                document.getElementById('minutes').textContent = '0';
+                document.getElementById('seconds').textContent = '0';
+
+                isCounting = false;
+                start.textContent = 'Start';
+            }
+        }
+    </script>
+
+
+
+</body>
+
+</html>

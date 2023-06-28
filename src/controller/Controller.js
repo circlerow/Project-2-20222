@@ -143,7 +143,11 @@ let compilePage = (req, res) => {
     res.render("G:/Project-2-20222/src/view/index.ejs")
 }
 
+let contestPage = async (req, res) => {
+    const [rows] = await pool.execute('SELECT * FROM exercise');
+    res.render("G:/Project-2-20222/src/view/contest.ejs", { dataExercise: rows })
+}
 
 export default {
-    getExercise, getDetailExercise, compilerMachine, compilePage, userPage,
+    getExercise, getDetailExercise, compilerMachine, compilePage, userPage, contestPage
 };
