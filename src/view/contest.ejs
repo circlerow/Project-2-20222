@@ -6,7 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
     <link rel="stylesheet" href="css/contest.css">
+    <script src="https://kit.fontawesome.com/f8e2bc67ef.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../codemirror-5.65.12/lib/codemirror.css">
+    <script src="../../codemirror-5.65.12/mode/python/python.js"></script>
+    <script src="../../codemirror-5.65.12/lib/codemirror.js"></script>
+    <script src="../../codemirror-5.65.12/mode/clike/clike.js"></script>
+    <link rel="stylesheet" href="../../codemirror-5.65.12/theme/dracula.css">
+    <script src="../../codemirror-5.65.12/addon/edit/closebrackets.js"></script>
     <title>Contest</title>
 
 </head>
@@ -55,34 +63,41 @@
         var start = document.getElementById("start");
         var clockInterval;
         var isCounting = false;
-        var countExercise = '<%=dataExercise.length %>';
+        var countExercise = parseInt('<%=dataExercise.length %>');
         const countdownDuration = 2 * 60 * 60 * 1000 + 2000;
         const targetTime = Date.now() + countdownDuration;
-        const score = 0;
+        var scoreTemp = [0, 0, 0, 0, 0];
+        var score = scoreTemp[0] + scoreTemp[1] + scoreTemp[2] + scoreTemp[3] + scoreTemp[4];
         var dataExercise = '<%= JSON.stringify(dataExercise) %>';
         const decodedString = decodeHtml(dataExercise);
         dataExercise = JSON.parse(decodedString);
         var numbers = [];
+        console.log(countExercise);
         while (numbers.length < 5) {
             var randomNumber = Math.floor(Math.random() * countExercise);
             if (!numbers.includes(randomNumber)) {
                 numbers.push(randomNumber);
             }
         }
+        console.log(numbers);
 
         start.addEventListener('click', async function () {
             document.getElementById('choose').style.visibility = 'visible';
             document.getElementById('score').innerHTML = `<h5>Điểm của bạn: ${score}</h5>`;
+
             for (let i = 1; i <= 5; i++) {
                 document.getElementById('ex' + i).innerHTML = `<h3>Bài tập số ${i}</h3>`;
             }
             for (let i = 0; i < 5; i++) {
                 var temp = numbers[i];
+                console.log(temp);
                 var parent = document.getElementById('ex' + (i + 1));
                 var child1 = document.createElement('h4');
                 child1.innerHTML = dataExercise[temp].content;
+                parent.appendChild(child1);
                 var child2 = document.createElement('p');
                 child2.innerHTML = dataExercise[temp].detail;
+                parent.appendChild(child2);
                 var child3 = document.createElement('textarea');
                 child3.setAttribute('rows', '5');
                 child3.setAttribute('cols', '30');
@@ -91,14 +106,51 @@
                 child3.setAttribute('placeholder', 'Nhập câu trả lời của bạn vào đây');
                 child3.setAttribute('required', 'true');
                 child3.setAttribute('class', 'form-control');
+                parent.appendChild(child3);
                 var child4 = document.createElement('button');
-                child4.setAttribute('id', 'submit' + (i + 1));
+                child4.setAttribute('id', 'submit' + temp);
                 child4.setAttribute('class', 'btn btn-success btn-submit');
                 child4.textContent = 'Nộp bài';
+                var editor = [];
+                console.log("answer" + temp);
+                console.log("answer" + numbers[i]);
 
-                parent.appendChild(child1);
-                parent.appendChild(child2);
-                parent.appendChild(child3);
+                child4.addEventListener('click', async function () {
+                    inputArray = [dataExercise[numbers[i]].input1, dataExercise[numbers[i]].input2, dataExercise[numbers[i]].input3, dataExercise[numbers[i]].input4, dataExercise[numbers[i]].input5];
+                    outputArray = [dataExercise[numbers[i]].output1, dataExercise[numbers[i]].output2, dataExercise[numbers[i]].output3, dataExercise[numbers[i]].output4, dataExercise[numbers[i]].output5];
+                    console.log(inputArray);
+                    console.log(outputArray);
+                    editor[numbers[i]] = CodeMirror.fromTextArea(document.getElementById("answer" + numbers[i]), {
+                        lineNumbers: true,
+                        theme: "dracula",
+                        autoCloseBrackets: true
+                    });
+                    for (let j = 0; j < 5; j++) {
+                        var input = inputArray[j];
+                        var output = outputArray[j];
+                        var lang = document.getElementById("inlineFormSelectPref");
+                        code = {
+                            code: editor[numbers[i]].getValue(),
+                            input: input,
+                            lang: lang.value
+                        };
+                        console.log(code);
+                        var oData = await fetch("http://localhost:8000/compile", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(code)
+                        });
+                        var d = await oData.json();
+                        var output_value = d.output;
+                        if (output_value == output) {
+                            scoreTemp[i] += 20;
+                            console.log(scoreTemp[i]);
+                        }
+                    }
+                });
+
                 parent.appendChild(child4);
             }
             if (!isCounting) {
