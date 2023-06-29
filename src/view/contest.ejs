@@ -60,6 +60,7 @@
         <button class="btn btn-success center-button" id="start">Bắt đầu</button>
     </div>
     <script>
+        var score = 0;
         var start = document.getElementById("start");
         var clockInterval;
         var isCounting = false;
@@ -67,7 +68,6 @@
         const countdownDuration = 2 * 60 * 60 * 1000 + 2000;
         const targetTime = Date.now() + countdownDuration;
         var scoreTemp = [0, 0, 0, 0, 0];
-        var score = scoreTemp[0] + scoreTemp[1] + scoreTemp[2] + scoreTemp[3] + scoreTemp[4];
         var dataExercise = '<%= JSON.stringify(dataExercise) %>';
         const decodedString = decodeHtml(dataExercise);
         dataExercise = JSON.parse(decodedString);
@@ -90,7 +90,6 @@
             }
             for (let i = 0; i < 5; i++) {
                 var temp = numbers[i];
-                console.log(temp);
                 var parent = document.getElementById('ex' + (i + 1));
                 var child1 = document.createElement('h4');
                 child1.innerHTML = dataExercise[temp].content;
@@ -111,26 +110,23 @@
                 child4.setAttribute('id', 'submit' + temp);
                 child4.setAttribute('class', 'btn btn-success btn-submit');
                 child4.textContent = 'Nộp bài';
-                var editor = [];
-                console.log("answer" + temp);
-                console.log("answer" + numbers[i]);
+
+
 
                 child4.addEventListener('click', async function () {
+                    var scoreTem = 0
                     inputArray = [dataExercise[numbers[i]].input1, dataExercise[numbers[i]].input2, dataExercise[numbers[i]].input3, dataExercise[numbers[i]].input4, dataExercise[numbers[i]].input5];
                     outputArray = [dataExercise[numbers[i]].output1, dataExercise[numbers[i]].output2, dataExercise[numbers[i]].output3, dataExercise[numbers[i]].output4, dataExercise[numbers[i]].output5];
                     console.log(inputArray);
                     console.log(outputArray);
-                    editor[numbers[i]] = CodeMirror.fromTextArea(document.getElementById("answer" + numbers[i]), {
-                        lineNumbers: true,
-                        theme: "dracula",
-                        autoCloseBrackets: true
-                    });
+
                     for (let j = 0; j < 5; j++) {
                         var input = inputArray[j];
                         var output = outputArray[j];
                         var lang = document.getElementById("inlineFormSelectPref");
+                        var code = document.getElementById("answer" + numbers[i]).value;
                         code = {
-                            code: editor[numbers[i]].getValue(),
+                            code: code,
                             input: input,
                             lang: lang.value
                         };
@@ -145,15 +141,23 @@
                         var d = await oData.json();
                         var output_value = d.output;
                         if (output_value == output) {
-                            scoreTemp[i] += 20;
-                            console.log(scoreTemp[i]);
+                            scoreTem += 20;
                         }
-                    }
-                });
 
+
+                    }
+                    if (scoreTem > scoreTemp[i]) {
+                        scoreTemp[i] = scoreTem;
+                    }
+                    console.log(scoreTemp[i]);
+                    score = scoreTemp[0] + scoreTemp[1] + scoreTemp[2] + scoreTemp[3] + scoreTemp[4];
+                    document.getElementById('score').textContent = `Điểm của bạn: ${score}`;
+                });
                 parent.appendChild(child4);
             }
+
             if (!isCounting) {
+                await setInterval(updateScore, 1000);
                 clearInterval(clockInterval);
                 clockInterval = await setInterval(updateClock, 1000);
                 isCounting = true;
