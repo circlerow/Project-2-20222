@@ -27,7 +27,16 @@
     </div>
     <div id="score">
     </div>
-    <div class="exercise">
+    <div class="col-4 d-inline-block choose-container" id="choose">
+        <label class="visually-hidden" for="inlineFormSelectPref">Chọn ngôn ngữ</label>
+        <select class="form-select" id="inlineFormSelectPref">
+            <option selected>Choose...</option>
+            <option value="Java">Java</option>
+            <option value="Cpp">Cpp</option>
+            <option value="python">python</option>
+        </select>
+    </div>
+    <div class="exercise col-8">
         <div id="ex1">
         </div>
         <div id="ex2">
@@ -50,6 +59,9 @@
         const countdownDuration = 2 * 60 * 60 * 1000 + 2000;
         const targetTime = Date.now() + countdownDuration;
         const score = 0;
+        var dataExercise = '<%= JSON.stringify(dataExercise) %>';
+        const decodedString = decodeHtml(dataExercise);
+        dataExercise = JSON.parse(decodedString);
         var numbers = [];
         while (numbers.length < 5) {
             var randomNumber = Math.floor(Math.random() * countExercise);
@@ -57,14 +69,37 @@
                 numbers.push(randomNumber);
             }
         }
-        var dataExercise = []
-        console.log(numbers);
-        var dataE = `<%-dataExercise[${number[1]}].Id-%>`;
-        console.log(dataExercise);
+
         start.addEventListener('click', async function () {
+            document.getElementById('choose').style.visibility = 'visible';
             document.getElementById('score').innerHTML = `<h5>Điểm của bạn: ${score}</h5>`;
             for (let i = 1; i <= 5; i++) {
                 document.getElementById('ex' + i).innerHTML = `<h3>Bài tập số ${i}</h3>`;
+            }
+            for (let i = 0; i < 5; i++) {
+                var temp = numbers[i];
+                var parent = document.getElementById('ex' + (i + 1));
+                var child1 = document.createElement('h4');
+                child1.innerHTML = dataExercise[temp].content;
+                var child2 = document.createElement('p');
+                child2.innerHTML = dataExercise[temp].detail;
+                var child3 = document.createElement('textarea');
+                child3.setAttribute('rows', '5');
+                child3.setAttribute('cols', '30');
+                child3.setAttribute('id', 'answer' + temp);
+                child3.setAttribute('name', 'answer' + temp);
+                child3.setAttribute('placeholder', 'Nhập câu trả lời của bạn vào đây');
+                child3.setAttribute('required', 'true');
+                child3.setAttribute('class', 'form-control');
+                var child4 = document.createElement('button');
+                child4.setAttribute('id', 'submit' + (i + 1));
+                child4.setAttribute('class', 'btn btn-success btn-submit');
+                child4.textContent = 'Nộp bài';
+
+                parent.appendChild(child1);
+                parent.appendChild(child2);
+                parent.appendChild(child3);
+                parent.appendChild(child4);
             }
             if (!isCounting) {
                 clearInterval(clockInterval);
@@ -83,6 +118,12 @@
                 start.id = 'start';
             }
         });
+
+        function decodeHtml(html) {
+            var txt = document.createElement("textarea");
+            txt.innerHTML = html;
+            return txt.value;
+        }
 
         function displayCountdown() {
             const remainingTime = targetTime - Date.now();
