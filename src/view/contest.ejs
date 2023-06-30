@@ -16,11 +16,9 @@
     <link rel="stylesheet" href="../../codemirror-5.65.12/theme/dracula.css">
     <script src="../../codemirror-5.65.12/addon/edit/closebrackets.js"></script>
     <title>Contest</title>
-
 </head>
 
 <body>
-
     <div>
         <h1>Weekly Contest 1</h1>
     </div>
@@ -29,7 +27,6 @@
         <p>Đây là bài thi kiểm tra kiến thức môn tin học đại cương</p>
     </div>
     <div id="name">
-
     </div>
     <div class="clock-container">
         <span id="hours"></span>
@@ -68,49 +65,47 @@
         var clockInterval;
         var isCounting = false;
         var countExercise = parseInt('<%=dataExercise.length %>');
-        const countdownDuration = 2 * 60 * 60 * 1000 + 2000;
+        const countdownDuration = (2 * 60 * 60 + 1) * 1000;
         const targetTime = Date.now() + countdownDuration;
         var scoreTemp = [0, 0, 0, 0, 0];
         var dataExercise = '<%= JSON.stringify(dataExercise) %>';
         const decodedString = decodeHtml(dataExercise);
         dataExercise = JSON.parse(decodedString);
         var numbers = [];
-        console.log(countExercise);
         while (numbers.length < 5) {
             var randomNumber = Math.floor(Math.random() * countExercise);
             if (!numbers.includes(randomNumber)) {
                 numbers.push(randomNumber);
             }
         }
-        console.log(numbers);
-
         start.addEventListener('click', async function () {
-            parent1 = document.getElementById('name');
+            parent_1 = document.getElementById('name');
             child1_1 = document.createElement('h3');
             child1_1.innerHTML = 'Nhập họ tên sinh viên';
-            parent1.appendChild(child1_1);
             child1_2 = document.createElement('input');
             child1_2.setAttribute('type', 'text');
             child1_2.setAttribute('id', 'nameStudent');
             child1_2.setAttribute('name', 'nameStudent');
-            parent1.appendChild(child1_2);
-
+            parent_1.append(child1_1, child1_2);
 
             document.getElementById('choose').style.visibility = 'visible';
             document.getElementById('score').innerHTML = `<h5>Điểm của bạn: ${score}</h5>`;
 
-            for (let i = 1; i <= 5; i++) {
-                document.getElementById('ex' + i).innerHTML = `<h3>Bài tập số ${i}</h3>`;
-            }
+
             for (let i = 0; i < 5; i++) {
+                document.getElementById('ex' + (i + 1)).innerHTML = `<h3>Bài tập số ${i + 1}</h3>`;
                 var temp = numbers[i];
+
                 var parent = document.getElementById('ex' + (i + 1));
+
                 var child1 = document.createElement('h4');
                 child1.innerHTML = dataExercise[temp].content;
                 parent.appendChild(child1);
+
                 var child2 = document.createElement('p');
                 child2.innerHTML = dataExercise[temp].detail;
                 parent.appendChild(child2);
+
                 var child3 = document.createElement('textarea');
                 child3.setAttribute('rows', '5');
                 child3.setAttribute('cols', '30');
@@ -120,13 +115,13 @@
                 child3.setAttribute('required', 'true');
                 child3.setAttribute('class', 'form-control');
                 parent.appendChild(child3);
+
                 var child4 = document.createElement('button');
                 child4.setAttribute('id', 'submit' + temp);
-                child4.setAttribute('class', 'btn btn-success btn-submit');
+                child4.setAttribute('class', 'btn btn-success btn-submit btn-sm');
                 child4.textContent = 'Nộp bài';
-
                 child4.addEventListener('click', async function () {
-                    var scoreTem = 0
+                    var score_Temp = 0
                     inputArray = [dataExercise[numbers[i]].input1, dataExercise[numbers[i]].input2, dataExercise[numbers[i]].input3, dataExercise[numbers[i]].input4, dataExercise[numbers[i]].input5];
                     outputArray = [dataExercise[numbers[i]].output1, dataExercise[numbers[i]].output2, dataExercise[numbers[i]].output3, dataExercise[numbers[i]].output4, dataExercise[numbers[i]].output5];
                     console.log(inputArray);
@@ -153,16 +148,14 @@
                         var d = await oData.json();
                         var output_value = d.output;
                         if (output_value == output) {
-                            scoreTem += 20;
+                            score_Temp += 20;
                         }
                     }
-                    if (scoreTem > scoreTemp[i]) {
-                        scoreTemp[i] = scoreTem;
+                    if (score_Temp > scoreTemp[i]) {
+                        scoreTemp[i] = score_Temp;
                     }
-                    console.log(scoreTemp[i]);
                     score = scoreTemp[0] + scoreTemp[1] + scoreTemp[2] + scoreTemp[3] + scoreTemp[4];
                     document.getElementById('score').textContent = `Điểm của bạn: ${score}`;
-
                 });
                 parent.appendChild(child4);
             }
