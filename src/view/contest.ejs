@@ -63,7 +63,6 @@
         <button class="btn btn-success center-button" id="start">Bắt đầu</button>
     </div>
     <script>
-        var name = '';
         var score = 0;
         var start = document.getElementById("start");
         var clockInterval;
@@ -86,11 +85,17 @@
         console.log(numbers);
 
         start.addEventListener('click', async function () {
-            document.getElementById('name').innerHTML = `<h5>Nhập tên sinh viên</h5>`;
-            document.getElementById('name').innerHTML += `<input type="text" id="nameStudent" name="nameStudent" placeholder="Nhập tên sinh viên">`;
-            document.getElementById('nameStudent').addEventListener(onchange, function () {
-                name = document.getElementById('nameStudent').value;
-            });
+            parent1 = document.getElementById('name');
+            child1_1 = document.createElement('h3');
+            child1_1.innerHTML = 'Nhập họ tên sinh viên';
+            parent1.appendChild(child1_1);
+            child1_2 = document.createElement('input');
+            child1_2.setAttribute('type', 'text');
+            child1_2.setAttribute('id', 'nameStudent');
+            child1_2.setAttribute('name', 'nameStudent');
+            parent1.appendChild(child1_2);
+
+
             document.getElementById('choose').style.visibility = 'visible';
             document.getElementById('score').innerHTML = `<h5>Điểm của bạn: ${score}</h5>`;
 
@@ -157,10 +162,11 @@
                     console.log(scoreTemp[i]);
                     score = scoreTemp[0] + scoreTemp[1] + scoreTemp[2] + scoreTemp[3] + scoreTemp[4];
                     document.getElementById('score').textContent = `Điểm của bạn: ${score}`;
+
                 });
                 parent.appendChild(child4);
             }
-
+            var name = document.getElementById('nameStudent').value;
             if (!isCounting) {
                 clearInterval(clockInterval);
                 clockInterval = await setInterval(updateClock, 1000);
@@ -170,7 +176,7 @@
                 start.classList.remove('btn-success');
                 start.classList.add('btn-danger');
             } else {
-                console.log(name);
+                console.log("name:", name);
                 var result = {
                     name: name,
                     score: score
