@@ -59,6 +59,10 @@
     <div>
         <button class="btn btn-success center-button" id="start">Bắt đầu</button>
     </div>
+    <div style="text-align:center">
+        <a href="/user-page">Trở về</a>
+    </div>
+
     <script>
         var score = 0;
         var start = document.getElementById("start");
@@ -168,6 +172,7 @@
                 start.textContent = 'Kết thúc';
                 start.classList.remove('btn-success');
                 start.classList.add('btn-danger');
+
             } else {
                 console.log("name:", name);
                 var result = {
@@ -181,6 +186,8 @@
                     },
                     body: JSON.stringify(result)
                 });
+
+                window.location.replace("http://localhost:8000/user-page");
             }
         });
 

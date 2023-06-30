@@ -154,6 +154,11 @@ let contestSubmit = async (req, res) => {
     await pool.execute('insert into contest(name,score) values (?, ?)', [name, score]);
     return res.redirect('/');
 }
+
+let userPageInit = async (req, res) => {
+    return res.render('userPage.ejs');
+
+}
 export default {
-    getExercise, getDetailExercise, compilerMachine, compilePage, userPage, contestPage, contestSubmit
+    getExercise, getDetailExercise, compilerMachine, compilePage, userPage, contestPage, contestSubmit, userPageInit
 };
