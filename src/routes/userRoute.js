@@ -10,6 +10,7 @@ const initUserRoutes = (app) => {
     router.post("/compile", controller.compilerMachine)
     router.get("/user", controller.userPage)
     router.get("/contest", controller.contestPage)
+    router.post("/contest-submit", controller.contestSubmit)
     return app.use('/', router);
 }
 

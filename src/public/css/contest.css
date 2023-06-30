@@ -57,3 +57,11 @@ h1 {
 .choose-container {
     visibility: hidden;
 }
+
+#name {
+    margin: auto;
+    width: 30%;
+    text-align: center;
+    font-size: 24px;
+    padding-bottom: 20px;
+}

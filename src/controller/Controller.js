@@ -148,6 +148,12 @@ let contestPage = async (req, res) => {
     res.render("G:/Project-2-20222/src/view/contest.ejs", { dataExercise: rows })
 }
 
+let contestSubmit = async (req, res) => {
+    console.log("check:", req.body)
+    let { name, score } = req.body;
+    await pool.execute('insert into contest(name,score) values (?, ?)', [name, score]);
+    return res.redirect('/');
+}
 export default {
-    getExercise, getDetailExercise, compilerMachine, compilePage, userPage, contestPage
+    getExercise, getDetailExercise, compilerMachine, compilePage, userPage, contestPage, contestSubmit
 };
