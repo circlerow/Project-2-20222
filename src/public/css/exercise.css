@@ -60,3 +60,45 @@ a {
 
     vertical-align: middle;
 }
+
+.table-gold {
+    --bs-table-color: #000;
+    --bs-table-bg: gold;
+    --bs-table-border-color: #bcd0c7;
+    --bs-table-striped-bg: rgba(229, 198, 21, 0.676);
+    --bs-table-striped-color: #000;
+    --bs-table-active-bg: #bcd0c7;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #c1d6cc;
+    --bs-table-hover-color: #000;
+    color: var(--bs-table-color);
+    border-color: var(--bs-table-border-color)
+}
+
+.table-silver {
+    --bs-table-color: #000;
+    --bs-table-bg: silver;
+    --bs-table-border-color: #bcd0c7;
+    --bs-table-striped-bg: rgb(188, 185, 185);
+    --bs-table-striped-color: #000;
+    --bs-table-active-bg: #bcd0c7;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #c1d6cc;
+    --bs-table-hover-color: #000;
+    color: var(--bs-table-color);
+    border-color: var(--bs-table-border-color)
+}
+
+.table-bronze {
+    --bs-table-color: #000;
+    --bs-table-bg: #CD7F32;
+    --bs-table-border-color: #bcd0c7;
+    --bs-table-striped-bg: #d3771a;
+    --bs-table-striped-color: #000;
+    --bs-table-active-bg: #bcd0c7;
+    --bs-table-active-color: #000;
+    --bs-table-hover-bg: #c1d6cc;
+    --bs-table-hover-color: #000;
+    color: var(--bs-table-color);
+    border-color: var(--bs-table-border-color)
+}

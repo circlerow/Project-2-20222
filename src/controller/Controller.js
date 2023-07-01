@@ -157,8 +157,12 @@ let contestSubmit = async (req, res) => {
 
 let userPageInit = async (req, res) => {
     return res.render('userPage.ejs');
-
 }
+let rankPage = async (req, res) => {
+    const [rows] = await pool.execute('SELECT * FROM contest ORDER BY score DESC');
+    res.render("G:/Project-2-20222/src/view/rank.ejs", { rows: rows })
+}
+
 export default {
-    getExercise, getDetailExercise, compilerMachine, compilePage, userPage, contestPage, contestSubmit, userPageInit
+    getExercise, getDetailExercise, compilerMachine, compilePage, userPage, contestPage, contestSubmit, userPageInit, rankPage
 };
